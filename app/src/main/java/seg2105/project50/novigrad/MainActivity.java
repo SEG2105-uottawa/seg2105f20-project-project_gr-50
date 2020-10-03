@@ -15,14 +15,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnsignup = (Button) findViewById(R.id.btnsignup);
+        Button btnsignup = (Button) findViewById(R.id.btnsignup1);
         btnsignup.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 startActivity(new Intent(MainActivity.this,
                         SignUp.class));
+
             }
         });
-
         Button btnsignin = (Button) findViewById(R.id.btnsignin);
         btnsignin.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
