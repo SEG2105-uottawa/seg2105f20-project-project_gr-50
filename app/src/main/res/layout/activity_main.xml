@@ -9,45 +9,79 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingBottom="300dp"
-        android:background="@drawable/finalnovigrad"
-
+        android:background="#d9effa"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextTextEmailAddress"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#d9effa"
+            app:srcCompat="@drawable/novigrad3d" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:background="#d9effa"
             android:gravity="center"
-            android:text="@string/email"
-            android:inputType="textEmailAddress" />
+            android:orientation="vertical"
 
-        <EditText
-            android:id="@+id/editTextTextPassword"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center"
-            android:text="d0000000"
-            android:inputType="textPassword"
-            android:autofillHints="" />
+            android:paddingBottom="0dp">
 
-        <Button
-            android:id="@+id/btnsignin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/sign_in" />
+            <EditText
+                android:id="@+id/editTextTextEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_text_zone"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:text="@string/email" />
 
-        <Button
-            android:id="@+id/btnsignup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/sign_up" />
+            <EditText
+                android:id="@+id/editTextTextPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_zone"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:text="d0000000" />
 
+            <Button
+                android:id="@+id/btnsignin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_button"
+                android:gravity="center"
+                android:text="@string/sign_in" />
+
+            <Button
+                android:id="@+id/btnsignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_button"
+                android:gravity="center"
+                android:text="@string/sign_up" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

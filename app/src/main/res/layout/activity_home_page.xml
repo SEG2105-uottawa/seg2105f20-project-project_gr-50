@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="95dp"
             android:gravity="center"
             android:text="@string/greeting" />
     </LinearLayout>
