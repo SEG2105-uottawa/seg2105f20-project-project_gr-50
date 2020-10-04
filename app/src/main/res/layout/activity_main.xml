@@ -20,12 +20,13 @@
             app:srcCompat="@drawable/novigrad3d" />
 
         <LinearLayout
+            android:id="@+id/editEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#d9effa"
             android:gravity="center"
-            android:orientation="vertical"
 
+            android:orientation="vertical"
             android:paddingBottom="0dp">
 
             <EditText
@@ -41,9 +42,9 @@
                 android:background="@drawable/rounded_text_zone"
                 android:ems="10"
                 android:gravity="center"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:padding="10dp"
-                android:hint="@string/email" />
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/editTextTextPassword"
@@ -59,9 +60,9 @@
                 android:background="@drawable/rounded_text_zone"
                 android:ems="10"
                 android:gravity="center"
+                android:hint="Password"
                 android:inputType="textPassword"
-                android:padding="10dp"
-                android:hint="Password" />
+                android:padding="10dp" />
 
             <Button
                 android:id="@+id/btnsignin"

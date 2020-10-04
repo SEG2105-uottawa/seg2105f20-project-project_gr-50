@@ -15,25 +15,31 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private String email, password;
-    private TextView emailTextView, passwordTextView;
+    private EditText emailTextView, passwordTextView;
+    //private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        emailTextView = findViewById(R.id.editTextTextEmailAddress);
+        passwordTextView = findViewById(R.id.editTextTextPassword);
+        auth= FirebaseAuth.getInstance();
 
-        Button btnsignup = (Button) findViewById(R.id.btnsignup1);
-        btnsignup.setOnClickListener(new View.OnClickListener(){
+        Button btnsignin = (Button) findViewById(R.id.btnsignin);
+        btnsignin.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
 
                 email = emailTextView.getText().toString();
                 password = passwordTextView.getText().toString();
+
 
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
@@ -42,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     finish();
                                     startActivity(new Intent(getApplicationContext(),
-                                            SignUp.class));
+                                            HomePage.class));
+                                   // finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Login failed...", Toast.LENGTH_LONG).show();
                                 }
@@ -51,16 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Button btnsignin = (Button) findViewById(R.id.btnsignin);
-        btnsignin.setOnClickListener(new View.OnClickListener(){
+        Button btnsignup = (Button) findViewById(R.id.btnsignup1);
+        btnsignup.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 finish();
-                startActivity(new Intent(MainActivity.this,
-                        HomePage.class));
+                startActivity(new Intent(getApplicationContext(),
+                        SignUp.class));
+                //finish();
             }
         });
 
 
     }
+
 
 }

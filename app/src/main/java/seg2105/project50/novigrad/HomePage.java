@@ -39,12 +39,13 @@ public class HomePage extends AppCompatActivity {
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
 
-        btnLogout.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                startActivity(new Intent(HomePage.this,
-                        MainActivity.class));
-            }
-        });
+        //btnLogout.setOnClickListener(new View.OnClickListener(){
+           // public void onClick(View view){
+
+               // startActivity(new Intent(HomePage.this,
+                     //   MainActivity.class));
+           // }
+        //});
 
         if (user == null){
             finish();
@@ -71,6 +72,16 @@ public class HomePage extends AppCompatActivity {
             });
         }
 
+    }
+    public void onClick(View view){
+        finish();
+        startActivity(new Intent(getApplicationContext(),
+                MainActivity.class));
+    }
+    public void signOut(View v){
+        auth.signOut();
+        finish();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
 

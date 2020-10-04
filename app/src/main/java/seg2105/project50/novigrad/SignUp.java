@@ -58,13 +58,24 @@ public class SignUp extends AppCompatActivity {
                 public void onClick(View view){
                     int radioId= radioGroup.getCheckedRadioButtonId();
                     radioButton= findViewById(radioId);
+                    String string_email;
+                    String string_password;
+                    String string_name;
 
-                    String string_email = email.getText().toString().trim();
-                     String string_password = password.getText().toString().trim();
-                    String string_name = name.getText().toString().trim();
-
+                    try {
+                        string_email = email.getText().toString().trim();
+                         string_password = password.getText().toString().trim();
+                         string_name = name.getText().toString().trim();
+                    }
+                    catch(Exception e){
+                        finish();
+                        return;
+                    }
                     final Person mcitizen = new Person (string_name,radioButton.getText().toString(),string_email,string_password);
 
+                    if(string_email==null){return;}
+                    if(string_password==null){return;}
+                    if(string_name==null){return;}
                     if(TextUtils.isEmpty(string_email)){
                         email.setError("Please enter a valid email");
                         return;
@@ -83,7 +94,7 @@ public class SignUp extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).setValue(mcitizen);
-                                Toast.makeText(SignUp.this, radioButton.getText().toString()+"account created", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUp.this, radioButton.getText().toString()+" account created", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(),HomePage.class));
                             }
                             else{
