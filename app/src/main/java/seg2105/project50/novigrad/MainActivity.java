@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 password = passwordTextView.getText().toString();
 
                 auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
-                            public void onComplete(@NonNul Task<AuthResult> task) {
+                            public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     finish();
-                                    startActivity(new Intent(MainActivity.this,
+                                    startActivity(new Intent(getApplicationContext(),
                                             SignUp.class));
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Login failed...", Toast.LENGTH_LONG).show();

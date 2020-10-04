@@ -52,13 +52,15 @@
                 android:id="@+id/employee_radio_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/employeebtn" />
+                android:onClick="checkButton"
+                android:text="@string/employee" />
 
             <RadioButton
                 android:id="@+id/customers_radio_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/customersbtn" />
+                android:onClick="checkButton"
+                android:text="@string/customer" />
         </RadioGroup>
 
         <Button
