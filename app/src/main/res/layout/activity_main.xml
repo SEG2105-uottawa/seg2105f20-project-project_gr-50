@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
@@ -43,7 +43,7 @@
                 android:gravity="center"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
-                android:text="@string/email" />
+                android:hint="@string/email" />
 
             <EditText
                 android:id="@+id/editTextTextPassword"
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:inputType="textPassword"
                 android:padding="10dp"
-                android:text="d0000000" />
+                android:hint="Password" />
 
             <Button
                 android:id="@+id/btnsignin"

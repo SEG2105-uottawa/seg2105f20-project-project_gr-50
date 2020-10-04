@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="@string/email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:autofillHints="" />
 
@@ -27,8 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:layout_marginTop="10dp"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:hint="Username"
             android:autofillHints="" />
 
         <EditText
@@ -36,12 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="d000000000000"
+            android:layout_marginTop="10dp"
+            android:hint="Password"
             android:inputType="textPassword"
             android:autofillHints="" />
 
         <RadioGroup
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content" >
 
             <RadioButton
@@ -61,6 +64,7 @@
             android:id="@+id/btnsignup2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_button"
 
             android:text="@string/sign_up" />
