@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnsignup = (Button) findViewById(R.id.btnsignup1);
         btnsignup.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
+            public void onClick(View view) {
 
                 email = emailTextView.getText().toString();
                 password = passwordTextView.getText().toString();
@@ -39,14 +39,13 @@ public class MainActivity extends AppCompatActivity {
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNul Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
-                                        finish();
-                                        startActivity(new Intent(MainActivity.this,
-                                                SignUp.class));
-                                    }
-                                    else{
-                                        Toast.makeText(getApplicationContext(), "Login failed...", Toast.LENGTH_LONG).show();
-                                    }
+                                if (task.isSuccessful()) {
+                                    finish();
+                                    startActivity(new Intent(MainActivity.this,
+                                            SignUp.class));
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Login failed...", Toast.LENGTH_LONG).show();
+                                }
                             }
                         });
 
