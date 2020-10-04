@@ -21,10 +21,10 @@
             android:text="@string/greeting" />
 
         <Button
-            android:id="@+id/logout_button"
+            android:id="@+id/btnLogout"
             android:layout_width="134dp"
             android:layout_height="wrap_content"
-            android:text="Logout" />
+            android:text="@string/btnLogout" />
 
     </LinearLayout>
 

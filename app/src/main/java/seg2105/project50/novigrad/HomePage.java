@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.*;
@@ -21,7 +23,7 @@ public class HomePage extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference database;
 
-
+    private Button btnLogout;
     private TextView textV;
 
     @Override
@@ -34,6 +36,15 @@ public class HomePage extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
 
         textV = (TextView) findViewById(R.id.textView);
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+
+
+        btnLogout.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                startActivity(new Intent(HomePage.this,
+                        MainActivity.class));
+            }
+        });
 
         if (user == null){
             finish();

@@ -15,4 +15,5 @@
     <string name="employeebtn">Employee</string>
     <string name="customersbtn">Customers</string>
     <string name="greeting">Welcome, succesfull authentification, employee or customers we dont know yet</string>
+    <string name="btnLogout">Logout</string>
 </resources>
