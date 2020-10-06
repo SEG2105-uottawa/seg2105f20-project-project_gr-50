@@ -48,7 +48,8 @@ public class SignUp extends AppCompatActivity {
             name = findViewById(R.id.NameSlot);
             fb = FirebaseAuth.getInstance();
             mDatabase = FirebaseDatabase.getInstance();
-
+            
+            
             if(fb.getCurrentUser()!=null){
                 startActivity(new Intent(getApplicationContext(),HomePage.class));
                 finish();

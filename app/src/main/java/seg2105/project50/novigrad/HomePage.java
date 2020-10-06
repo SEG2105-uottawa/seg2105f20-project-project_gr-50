@@ -22,6 +22,7 @@ public class HomePage extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private DatabaseReference database;
+    private Person citizen;
 
     private Button btnLogout;
     private TextView textV;
@@ -31,53 +32,62 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        database = FirebaseDatabase.getInstance().getReference();
+        //---------------------------------------------------------
 
-        textV = (TextView) findViewById(R.id.textView);
+
+                auth = FirebaseAuth.getInstance();
+                user = auth.getCurrentUser();
+                database = FirebaseDatabase.getInstance().getReference();
+
+                textV = (TextView) findViewById(R.id.textView);
+
+
+
+                if (user == null){
+                    finish();
+                    startActivity(new Intent(HomePage.this, MainActivity.class));
+                }
+                else{
+                    database.child("Citizens")
+                            .child(user.getUid())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange( DataSnapshot dataSnapshot) {
+
+                                    citizen = dataSnapshot.getValue(Person.class);
+
+                                    System.out.println(citizen);
+                                    String name = citizen.getName();
+                                    String role = citizen.getRole();
+
+                                    textV.setText("Welcome "+name+", "+role);
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                }
+
+
+
+
+
         btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut(view);
+            }
+        });
 
 
-        //btnLogout.setOnClickListener(new View.OnClickListener(){
-           // public void onClick(View view){
-
-               // startActivity(new Intent(HomePage.this,
-                     //   MainActivity.class));
-           // }
-        //});
-
-        if (user == null){
-            finish();
-            startActivity(new Intent(HomePage.this, MainActivity.class));
-        }
-        else{
-            database.child("Citizen")
-                    .child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Person citizen = dataSnapshot.getValue(Person.class);
-
-                    String name = citizen.getName();
-                    String role = citizen.getRole();
-
-                    textV.setText("Welcome "+name+"\nRole :"+role);
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
 
     }
-    public void onClick(View view){
-        finish();
-        startActivity(new Intent(getApplicationContext(),
-                MainActivity.class));
-    }
+
     public void signOut(View v){
         auth.signOut();
         finish();
