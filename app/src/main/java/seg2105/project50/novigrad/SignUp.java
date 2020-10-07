@@ -146,14 +146,20 @@ public class SignUp extends AppCompatActivity {
             password.setError("password should be at least 5 long");
             return false;
         }
-        else if(!PASSWORD_PATTERN.matcher(passwordInput).matches()){
-            password.setError("password should not contain spaces");
-            return false;
+        for(int i=0;i<passwordInput.length();i++){
+            if(passwordInput.charAt(i)==' '){
+                password.setError("password should not contain spaces");
+                return false;
+            }
         }
-        else{
+       // else if(!PASSWORD_PATTERN.matcher(passwordInput).matches()){
+         //   password.setError("password should not contain spaces");
+           // return false;
+       // }
+        //else{
             password.setError(null);
             return true;
-        }
+        //}
     }
 
     private boolean validateName(){
