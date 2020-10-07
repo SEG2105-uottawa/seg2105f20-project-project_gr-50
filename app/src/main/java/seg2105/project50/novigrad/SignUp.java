@@ -73,33 +73,33 @@ public class SignUp extends AppCompatActivity {
 
                     try {
                         string_email = email.getText().toString().trim();
-                         string_password = password.getText().toString().trim();
-                         string_name = name.getText().toString().trim();
+                        string_password = password.getText().toString().trim();
+                        string_name = name.getText().toString().trim();
+
+
+                        final Person mcitizen = new Person(string_name, radioButton.getText().toString(), string_email, string_password);
+
+                        if (!confirmInput()) {
+                            return;
+                        }
+                        fb.createUserWithEmailAndPassword(string_email, string_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).setValue(mcitizen);
+                                    Toast.makeText(SignUp.this, radioButton.getText().toString() + " account created", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), HomePage.class));
+                                } else {
+                                    Toast.makeText(SignUp.this, "Error creating an account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        // startActivity(new Intent(SignUp.this, HomePage.class));
                     }
                     catch(Exception e){
                         finish();
-                        return;
+                        startActivity(new Intent(getApplicationContext(),SignUp.class));
                     }
-
-                    final Person mcitizen = new Person (string_name,radioButton.getText().toString(),string_email,string_password);
-
-                    if(!confirmInput()){
-                        return;
-                    }
-                    fb.createUserWithEmailAndPassword(string_email , string_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).setValue(mcitizen);
-                                Toast.makeText(SignUp.this, radioButton.getText().toString()+" account created", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),HomePage.class));
-                            }
-                            else{
-                                Toast.makeText(SignUp.this, "Error creating an account"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                   // startActivity(new Intent(SignUp.this, HomePage.class));
                 }
             });
 
