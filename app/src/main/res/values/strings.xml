@@ -18,4 +18,6 @@
     <string name="btnLogout">Logout</string>
     <string name="customer">customer</string>
     <string name="employee">employee</string>
+    <string name="admin_greet">Welcome, Admin, logged in as Admin</string>
+    <string name="adminLogout">Logout</string>
 </resources>
