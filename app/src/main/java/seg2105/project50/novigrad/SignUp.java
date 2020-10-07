@@ -30,11 +30,6 @@ import java.util.regex.Pattern;
 
 public class SignUp extends AppCompatActivity {
 
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-            "(?=\\S+$)" +
-            "$");
-
     private Button btnsignup2;
     private EditText email, password, name;
     FirebaseAuth fb;
@@ -152,14 +147,8 @@ public class SignUp extends AppCompatActivity {
                 return false;
             }
         }
-       // else if(!PASSWORD_PATTERN.matcher(passwordInput).matches()){
-         //   password.setError("password should not contain spaces");
-           // return false;
-       // }
-        //else{
             password.setError(null);
             return true;
-        //}
     }
 
     private boolean validateName(){
