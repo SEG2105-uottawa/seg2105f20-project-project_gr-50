@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override

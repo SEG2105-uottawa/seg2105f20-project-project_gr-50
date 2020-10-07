@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -25,7 +26,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 public class SignUp extends AppCompatActivity {
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+            "(?=\\S+$)" +
+            "$");
 
     private Button btnsignup2;
     private EditText email, password, name;
@@ -72,24 +80,12 @@ public class SignUp extends AppCompatActivity {
                         finish();
                         return;
                     }
+
                     final Person mcitizen = new Person (string_name,radioButton.getText().toString(),string_email,string_password);
 
-                    if(string_email==null){return;}
-                    if(string_password==null){return;}
-                    if(string_name==null){return;}
-                    if(TextUtils.isEmpty(string_email)){
-                        email.setError("Please enter a valid email");
+                    if(!confirmInput()){
                         return;
                     }
-                    if(TextUtils.isEmpty(string_password)){
-                        password.setError("Please enter a valid password");
-                        return;
-                    }
-                    if(string_password.length()<5){
-                        password.setError("password should be at least 5 long");
-                        return;
-                    }
-
                     fb.createUserWithEmailAndPassword(string_email , string_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -113,4 +109,63 @@ public class SignUp extends AppCompatActivity {
 
         radioButton= findViewById(radioId);
     }
+
+    public boolean confirmInput(){
+        if (!validEmail() | !validateName() | !validatePassword()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    private boolean validEmail(){
+        String emailInput = email.getText().toString().trim();
+
+        if(emailInput.isEmpty()){
+            email.setError("Field can't be empty");
+            return false;
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+            email.setError("Please enter a valid email address");
+            return false;
+        }
+        else{
+            email.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword(){
+        String passwordInput = password.getText().toString().trim();
+        if(passwordInput.isEmpty()){
+            password.setError("Field can't be empty");
+            return false;
+        }
+        else if(passwordInput.length() < 5){
+            password.setError("password should be at least 5 long");
+            return false;
+        }
+        else if(!PASSWORD_PATTERN.matcher(passwordInput).matches()){
+            password.setError("password should not contain spaces");
+            return false;
+        }
+        else{
+            password.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateName(){
+        String nameInput = name.getText().toString().trim();
+        if(nameInput.isEmpty()){
+            name.setError("Field can't be empty");
+            return false;
+        }
+        else{
+            name.setError(null);
+            return true;
+        }
+    }
+
 }
