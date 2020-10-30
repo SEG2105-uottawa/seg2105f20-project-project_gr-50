@@ -23,4 +23,10 @@ public class Admin extends AppCompatActivity {
         finish();
         startActivity(new Intent(getApplicationContext(),DeleteUsers.class));
     }
+
+
+    public void manageServices(View view){
+        finish();
+        startActivity(new Intent(getApplicationContext(),ServicesEdit.class));
+    }
 }

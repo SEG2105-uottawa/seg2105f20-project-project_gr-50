@@ -112,5 +112,10 @@ public class HomePage extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
+    public void servicesAvailable(View view){
+        finish();
+        startActivity(new Intent(getApplicationContext(), ServicesAvailable.class));
+    }
+
 
 }

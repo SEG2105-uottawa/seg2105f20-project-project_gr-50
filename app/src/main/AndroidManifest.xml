@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeleteUsers"></activity>
+        <activity android:name=".ServicesAvailable"></activity>
+        <activity android:name=".ServiceInfoGather" />
+        <activity android:name=".ServicesEdit" />
+        <activity android:name=".DeleteUsers" />
         <activity android:name=".Admin" />
         <activity android:name=".HomePage" />
         <activity

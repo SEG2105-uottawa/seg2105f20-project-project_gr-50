@@ -21,6 +21,13 @@
             android:text="@string/greeting" />
 
         <Button
+            android:id="@+id/button3"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:onClick="servicesAvailable"
+            android:text="@string/Services" />
+
+        <Button
             android:id="@+id/btnLogout"
             android:layout_width="134dp"
             android:layout_height="wrap_content"

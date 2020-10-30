@@ -25,12 +25,21 @@
             android:text="@string/adminLogout" />
 
         <Button
+            android:id="@+id/button2"
+            android:layout_width="214dp"
+            android:layout_height="wrap_content"
+            android:onClick="manageServices"
+            android:translationY="-300dp"
+            android:text="Manage Services" />
+
+        <Button
             android:id="@+id/manage_users"
             android:layout_width="214dp"
             android:layout_height="wrap_content"
             android:onClick="manageUsers"
             android:text="@string/manageUsers"
             android:translationY="-300dp" />
+
     </LinearLayout>
 </RelativeLayout>
 
