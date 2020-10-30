@@ -140,4 +140,9 @@ public class ServicesAvailable extends AppCompatActivity {
         intent.putExtra("ser_num", "Service 3");
         startActivity(intent);
     }
+    public void takeHome(View view){
+        finish();
+        startActivity(new Intent(getApplicationContext(), HomePage.class));
+    }
 }
+
