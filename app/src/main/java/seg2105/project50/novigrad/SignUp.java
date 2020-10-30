@@ -71,14 +71,16 @@ public class SignUp extends AppCompatActivity {
                 public void onClick(View view){
                     int radioId= radioGroup.getCheckedRadioButtonId();
                     radioButton= findViewById(radioId);
-                    String string_email;
+                    final String string_email;
                     String string_password;
-                    String string_name;
+                    final String string_name;
 
                     try {
                         string_email = email.getText().toString().trim();
                         string_password = password.getText().toString().trim();
                         string_name = name.getText().toString().trim();
+
+
 
 
                         final Person mcitizen = new Person(string_name, radioButton.getText().toString(), string_email, string_password);
@@ -90,9 +92,24 @@ public class SignUp extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).setValue(mcitizen);
+                                    String email_no_signs="";
+                                    for(int i =0;i<string_email.length();i++){
+                                        if(string_email.charAt(i)!='@'&&string_email.charAt(i)!='.'){
+                                            email_no_signs+=string_email.charAt(i);
+                                        }
+                                    }
+                                    //mDatabase.getReference("Citizens").child(string_name).setValue(mcitizen); // added just now
+                                    //mDatabase.getReference("Citiznes").push().child(email_no_signs);
+                                   // mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid().replaceAll(fb.getCurrentUser().getUid(),email_no_signs)); //added
+                                    mDatabase.getReference("Citizens").child(email_no_signs).setValue(mcitizen);
+                                    //fb.getCurrentUser().getUid().replaceAll(fb.getCurrentUser().getUid().toString(),email_no_signs);
+                                         // Toast.makeText(SignUp.this, mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).toString(), Toast.LENGTH_SHORT).show();
+                                    //mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).setValue(mcitizen); //original
+                                   // mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid().replaceAll(fb.getCurrentUser().getUid(),email_no_signs));
+                                   /// mDatabase.getReference("Citiznes"). // still testin out diff things
                                     Toast.makeText(SignUp.this, radioButton.getText().toString() + " account created", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), HomePage.class));
+
                                 } else {
                                     Toast.makeText(SignUp.this, "Error creating an account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }

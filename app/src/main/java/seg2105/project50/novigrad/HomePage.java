@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.*;
 import com.google.firebase.database.DataSnapshot;
@@ -48,20 +49,37 @@ public class HomePage extends AppCompatActivity {
                     startActivity(new Intent(HomePage.this, MainActivity.class));
                 }
                 else{
+                   String first_email= user.getEmail();
+                   String bare_email= "";
+                   for(int i=0;i<first_email.length();i++){
+                       if(first_email.charAt(i)!='@'&&first_email.charAt(i)!='.'){
+                           bare_email+=first_email.charAt(i);
+                       }
+                   }
+                   // Toast.makeText(HomePage.this, user.getEmail(), Toast.LENGTH_SHORT).show();
                     database.child("Citizens")
-                            .child(user.getUid())
+                            .child(bare_email)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange( DataSnapshot dataSnapshot) {
 
                                     citizen = dataSnapshot.getValue(Person.class);
+                                    if(citizen!= null) {
+                                        System.out.println(citizen);
+                                        String name = citizen.getName();
+                                        String role = citizen.getRole();
 
-                                    System.out.println(citizen);
-                                    String name = citizen.getName();
-                                    String role = citizen.getRole();
+                                        textV.setText("Welcome " + name + ", " + role);
+                                    }
+                                    else{
+                                        finish(); //added
+                                        auth.signOut(); // added
+                                        Toast.makeText(HomePage.this, "Account disabled", Toast.LENGTH_SHORT).show(); //added
+                                        Toast.makeText(HomePage.this, "Account disabled", Toast.LENGTH_SHORT).show();
 
-                                    textV.setText("Welcome "+name+", "+role);
-
+                                        startActivity(new Intent(HomePage.this, MainActivity.class)); //added
+                                        finish();
+                                    }
 
                                 }
 

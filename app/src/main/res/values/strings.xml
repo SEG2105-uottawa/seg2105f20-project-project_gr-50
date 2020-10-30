@@ -20,4 +20,10 @@
     <string name="employee">employee</string>
     <string name="admin_greet">Welcome, Admin, logged in as Admin</string>
     <string name="adminLogout">Logout</string>
+    <string name="manageUsers">Manage Users</string>
+    <string name="implementingdeleteusershere">implementing delete users here</string>
+    <string name="delete">Delete</string>
+    <string name="enterUsersEmail">Enter Users Email</string>
+    <string name="emailNoSigns">Enter email with no \"@\",\".\" ie johngmailcom</string>
+    <string name="emailnoSigns">Enter email with no character \"@\"\".\" ie johngmailcom</string>
 </resources>

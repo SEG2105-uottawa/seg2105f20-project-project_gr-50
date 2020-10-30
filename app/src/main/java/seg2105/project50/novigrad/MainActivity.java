@@ -45,26 +45,26 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),Admin.class));
                     return;
                 }
-              try {
-                  auth.signInWithEmailAndPassword(email, password)
-                          .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                              @Override
-                              public void onComplete(@NonNull Task<AuthResult> task) {
-                                  if (task.isSuccessful()) {
-                                      finish();
-                                      startActivity(new Intent(getApplicationContext(),
-                                              HomePage.class));
-                                      // finish();
-                                  } else {
-                                      Toast.makeText(getApplicationContext(), "Login failed...", Toast.LENGTH_LONG).show();
-                                  }
-                              }
-                          });
-              }
-              catch(Exception e){
-                  finish();
-                  startActivity(new Intent(getApplicationContext(),MainActivity.class));
-              }
+                try {
+                    auth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        finish();
+                                        startActivity(new Intent(getApplicationContext(),
+                                                HomePage.class));
+                                        // finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Login failed...", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                }
+                catch(Exception e){
+                    finish();
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                }
 
             }
         });
