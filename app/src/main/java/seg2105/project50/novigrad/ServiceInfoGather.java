@@ -134,6 +134,12 @@ public class ServiceInfoGather extends AppCompatActivity {
                 String text_dv = dv.getText().toString().trim();
                 String name = serviceName.getText().toString().trim();
 
+                if (!checkFields(text_fn,text_ln,text_db,text_ad,text_pr,text_ps,text_id,text_dv)){
+                    Toast.makeText(getApplicationContext(), "All fields should be filled",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 String dbPath = "service-"+name;
 
                 String[] info = {text_fn, text_ln, text_db, text_ad, text_pr, text_ps
@@ -157,5 +163,34 @@ public class ServiceInfoGather extends AppCompatActivity {
     public void takeHome(View view){
         finish();
         startActivity(new Intent(getApplicationContext(), HomePage.class));
+    }
+
+    public boolean checkFields(String text_fn,String text_ln,String text_db,String text_ad,String text_pr,
+                               String text_ps,String text_id,String text_dv){
+        if (text_fn.isEmpty() && service.isFirstname()){
+            return false;
+        }
+        if(text_ln.isEmpty() && service.isLastname()){
+            return false;
+        }
+        if(text_db.isEmpty() && service.isDateofbirth()){
+            return false;
+        }
+        if(text_ad.isEmpty() && service.isAdress()){
+            return false;
+        }
+        if(text_pr.isEmpty() && service.isProofofresidence()){
+            return false;
+        }
+        if(text_ps.isEmpty() && service.isProofofstatus()){
+            return false;
+        }
+        if(text_id.isEmpty() && service.isIdnumber()){
+            return false;
+        }
+        if(text_dv.isEmpty() && service.isLicensetype()){
+            return false;
+        }
+        return true;
     }
 }

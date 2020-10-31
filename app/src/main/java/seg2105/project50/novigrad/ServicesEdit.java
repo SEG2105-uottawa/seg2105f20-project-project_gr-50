@@ -32,9 +32,6 @@ public class ServicesEdit extends AppCompatActivity {
 
 
 
-
-
-
         Button edit = (Button)findViewById(R.id.editdone);
 
         edit.setOnClickListener(new View.OnClickListener() {
