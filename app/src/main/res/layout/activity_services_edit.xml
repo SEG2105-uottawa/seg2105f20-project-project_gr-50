@@ -6,154 +6,165 @@
     android:layout_height="match_parent"
     tools:context=".ServicesEdit">
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="adminHome"
-        android:text="home" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginBottom="50dp"
-        android:gravity="center_vertical">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Choose the service to edit"
-            android:textSize="16dp"></TextView>
+            android:orientation="vertical" >
 
-        <RadioGroup
-            android:id="@+id/servicechoice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/ser_service1"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service 1" />
+                android:onClick="adminHome"
+                android:text="home" />
 
-            <RadioButton
-                android:id="@+id/ser_service2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Service 2" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/ser_service3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Service 3" />
-        </RadioGroup>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="Choose the service to edit"
+                    android:textSize="16dp"></TextView>
 
-        <TextView
-            android:id="@+id/ser_service"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Service Name" />
+                <RadioGroup
+                    android:id="@+id/servicechoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/ser_servicename"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="Please rename the service (you can type the last name if you don't want to change it)" />
+                    <RadioButton
+                        android:id="@+id/ser_service1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service 1" />
 
-        <TextView
-            android:id="@+id/ser_servicestate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Service State" />
+                    <RadioButton
+                        android:id="@+id/ser_service2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service 2" />
 
-        <RadioGroup
-            android:id="@+id/servicechoicestate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/ser_service3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service 3" />
+                </RadioGroup>
 
-            <RadioButton
-                android:id="@+id/ser_activate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Activate" />
+                <TextView
+                    android:id="@+id/ser_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Service Name" />
 
-            <RadioButton
-                android:id="@+id/ser_disable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Disable" />
-        </RadioGroup>
+                <EditText
+                    android:id="@+id/ser_servicename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="Please rename the service (you can type the last name if you don't want to change it)" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Choose the needed requirement for the service"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:layout_marginBottom="20dp"></TextView>
+                <TextView
+                    android:id="@+id/ser_servicestate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Service State" />
 
-        <CheckBox
-            android:id="@+id/ser_firstname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First Name" />
+                <RadioGroup
+                    android:id="@+id/servicechoicestate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/ser_lastname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Name" />
+                    <RadioButton
+                        android:id="@+id/ser_activate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Activate" />
 
-        <CheckBox
-            android:id="@+id/ser_dateofbirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date of birth" />
+                    <RadioButton
+                        android:id="@+id/ser_disable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Disable" />
+                </RadioGroup>
 
-        <CheckBox
-            android:id="@+id/ser_adress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adress" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="Choose the needed requirement for the service"
+                    android:textSize="16dp"></TextView>
 
-        <CheckBox
-            android:id="@+id/ser_proofofresidence"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Proof of residence" />
+                <CheckBox
+                    android:id="@+id/ser_licensetype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="License Type" />
 
-        <CheckBox
-            android:id="@+id/ser_proofofstatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Proof of status" />
+                <CheckBox
+                    android:id="@+id/ser_idnumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID number" />
 
-        <CheckBox
-            android:id="@+id/ser_idnumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ID number" />
+                <CheckBox
+                    android:id="@+id/ser_proofofstatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Proof of status" />
 
-        <CheckBox
-            android:id="@+id/ser_licensetype"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="License Type" />
+                <CheckBox
+                    android:id="@+id/ser_proofofresidence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Proof of residence" />
 
-        <Button
-            android:id="@+id/editdone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Done" />
+                <CheckBox
+                    android:id="@+id/ser_adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adress" />
 
-    </LinearLayout>
+                <CheckBox
+                    android:id="@+id/ser_dateofbirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date of birth" />
+
+                <CheckBox
+                    android:id="@+id/ser_lastname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last Name" />
+
+                <CheckBox
+                    android:id="@+id/ser_firstname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Name" />
+
+                <Button
+                    android:id="@+id/editdone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Done" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
