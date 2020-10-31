@@ -53,6 +53,7 @@
             android:id="@+id/ser1_db"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="date"
             android:hint = "Date of birth"/>
 
         <EditText
@@ -77,6 +78,7 @@
             android:id="@+id/ser1_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="ID number" />
 
         <EditText
