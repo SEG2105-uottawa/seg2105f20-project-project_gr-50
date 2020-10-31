@@ -1,3 +1,9 @@
+Build Status
+[![Build
+Status](https://circleci.com/gh/SEG2105-uottawa/seg2105f20-project-project_gr-50.png?branch=master)](https://circle
+ci.com/gh/SEG2105-uottawa/seg2105f20-project-project_gr-50)
+
+
 Deliverable 2
 
 Student Names
