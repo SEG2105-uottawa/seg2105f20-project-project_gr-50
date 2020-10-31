@@ -1,9 +1,6 @@
-#Starts Here
-
+# ServiceNovigrad
 Build Status
-[![BuildStatus](https://circleci.com/gh/SEG2105-uottawa/seg2105f20-project-project_gr-50.png?branch=master)](https://circleci.com/gh/SEG2105-uottawa/seg2105f20-project-project_gr-50)
-
-#Ends Here
+[![Build Status](https://circleci.com/gh/SEG2105-uottawa/seg2105f20-project-project_gr-50.png?branch=master)](https://circleci.com/gh/SEG2105-uottawa/seg2105f20-project-project_gr-50)
 
 Deliverable 2
 
