@@ -27,4 +27,6 @@
     <string name="emailNoSigns">Enter email with no \"@\",\".\" ie johngmailcom</string>
     <string name="emailnoSigns">Enter email with no character \"@\"\".\" ie johngmailcom</string>
     <string name="Services">Services</string>
+    <string name="EnterBranchName">Enter Branch Name</string>
+    <string name="EnterBranchNames">Enter Branch Name (employees only)</string>
 </resources>

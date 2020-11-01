@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 public class SignUp extends AppCompatActivity {
 
     private Button btnsignup2;
-    private EditText email, password, name;
+    private EditText email, password, name, branchName;
     FirebaseAuth fb;
     FirebaseDatabase mDatabase;
     RadioGroup radioGroup;
@@ -44,6 +44,7 @@ public class SignUp extends AppCompatActivity {
 
             radioGroup = findViewById(R.id.RadioGroup);
 
+            branchName= findViewById(R.id.EnterBranchName);
 
             btnsignup2 = (Button)findViewById(R.id.btnsignup2);
             email = findViewById(R.id.EmailSlot);
@@ -66,6 +67,7 @@ public class SignUp extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),HomePage.class));
                 finish();
             }
+
             btnsignup2.setOnClickListener(new View.OnClickListener(){
                 @SuppressLint("WrongViewCast")
                 public void onClick(View view){
@@ -74,16 +76,19 @@ public class SignUp extends AppCompatActivity {
                     final String string_email;
                     String string_password;
                     final String string_name;
+                    final String string_branchName;
 
                     try {
                         string_email = email.getText().toString().trim();
                         string_password = password.getText().toString().trim();
                         string_name = name.getText().toString().trim();
+                        string_branchName = branchName.getText().toString().trim();
 
 
 
 
-                        final Person mcitizen = new Person(string_name, radioButton.getText().toString(), string_email, string_password);
+
+                        final Person mcitizen = new Person(string_name, radioButton.getText().toString(), string_email, string_password,string_branchName);
 
                         if (!confirmInput()) {
                             return;
@@ -98,15 +103,9 @@ public class SignUp extends AppCompatActivity {
                                             email_no_signs+=string_email.charAt(i);
                                         }
                                     }
-                                    //mDatabase.getReference("Citizens").child(string_name).setValue(mcitizen); // added just now
-                                    //mDatabase.getReference("Citiznes").push().child(email_no_signs);
-                                   // mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid().replaceAll(fb.getCurrentUser().getUid(),email_no_signs)); //added
+
                                     mDatabase.getReference("Citizens").child(email_no_signs).setValue(mcitizen);
-                                    //fb.getCurrentUser().getUid().replaceAll(fb.getCurrentUser().getUid().toString(),email_no_signs);
-                                         // Toast.makeText(SignUp.this, mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).toString(), Toast.LENGTH_SHORT).show();
-                                    //mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid()).setValue(mcitizen); //original
-                                   // mDatabase.getReference("Citizens").child(fb.getCurrentUser().getUid().replaceAll(fb.getCurrentUser().getUid(),email_no_signs));
-                                   /// mDatabase.getReference("Citiznes"). // still testin out diff things
+
                                     Toast.makeText(SignUp.this, radioButton.getText().toString() + " account created", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), HomePage.class));
 
@@ -129,10 +128,16 @@ public class SignUp extends AppCompatActivity {
         int radioId= radioGroup.getCheckedRadioButtonId();
 
         radioButton= findViewById(radioId);
+        if(radioButton.getText().toString().equals("employee")){
+            branchName.setVisibility(View.VISIBLE);
+        }
+        else{
+            branchName.setVisibility(View.INVISIBLE);
+        }
     }
 
     public boolean confirmInput(){
-        if (!validEmail() | !validateName() | !validatePassword()){
+        if (!validEmail() | !validateName() | !validatePassword() | !validateBranchName()){
             return false;
         }
         else{
@@ -185,6 +190,21 @@ public class SignUp extends AppCompatActivity {
         }
         else{
             name.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateBranchName(){
+        String branchNameInput = branchName.getText().toString().trim();
+        int radioId= radioGroup.getCheckedRadioButtonId();
+        radioButton= findViewById(radioId);
+
+        if(branchNameInput.isEmpty()&&radioButton.getText().toString().equals("employee")){
+            branchName.setError("Field can't be empty");
+            return false;
+        }
+        else{
+            branchName.setError(null);
             return true;
         }
     }

@@ -52,7 +52,8 @@
             android:id="@+id/RadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:onClick="checkButton">
 
             <RadioButton
                 android:id="@+id/employee_radio_btn"
@@ -60,6 +61,14 @@
                 android:layout_height="wrap_content"
                 android:onClick="checkButton"
                 android:text="@string/employee" />
+
+            <EditText
+                android:id="@+id/EnterBranchName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/EnterBranchNames"
+                android:inputType="textPersonName" />
 
             <RadioButton
                 android:id="@+id/customers_radio_btn"
