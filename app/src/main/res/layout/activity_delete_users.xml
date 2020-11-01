@@ -25,13 +25,20 @@
             android:hint="@string/emailNoSigns"
             android:inputType="textPersonName"
             android:textColorHint="#B78D3A"
-            android:translationY="50dp" />
+            android:translationY="20dp" />
 
         <Button
             android:id="@+id/delete"
-            android:layout_width="115dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete"
-            android:translationY="60dp" />
+            android:translationY="13dp" />
+
+        <ListView
+            android:id="@+id/allUsers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
+
 </RelativeLayout>

@@ -6,92 +6,104 @@
     android:layout_height="match_parent"
     tools:context=".ServiceInfoGather">
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="takeHome"
-        android:text="home" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView3"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="19dp"
-            android:layout_marginBottom="15dp"
-            android:text="Service" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="19dp"
-            android:layout_marginBottom="15dp"
-            android:text="Please type the needed informations" />
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="takeHome"
+                android:text="home" />
 
-        <EditText
-            android:id="@+id/ser1_fn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint = "First name" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/ser1_ln"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Last name" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center"
+                    android:text="Service"
+                    android:textSize="19dp" />
 
-        <EditText
-            android:id="@+id/ser1_db"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:hint = "Date of birth"/>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center"
+                    android:text="Please type the needed informations"
+                    android:textSize="19dp" />
 
-        <EditText
-            android:id="@+id/ser1_ad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address" />
+                <EditText
+                    android:id="@+id/ser1_fn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="First name" />
 
-        <EditText
-            android:id="@+id/ser1_pr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint = "Proof of residence"/>
+                <EditText
+                    android:id="@+id/ser1_ln"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Last name" />
 
-        <EditText
-            android:id="@+id/ser1_ps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint = "Proof of status"/>
+                <EditText
+                    android:id="@+id/ser1_db"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date of birth"
+                    android:inputType="date" />
 
-        <EditText
-            android:id="@+id/ser1_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="ID number" />
+                <EditText
+                    android:id="@+id/ser1_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address" />
 
-        <EditText
-            android:id="@+id/ser1_dv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Driver's license type" />
+                <EditText
+                    android:id="@+id/ser1_pr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Proof of residence" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Done" />
+                <EditText
+                    android:id="@+id/ser1_ps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Proof of status" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/ser1_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ID number"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/ser1_dv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Driver's license type" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Done" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

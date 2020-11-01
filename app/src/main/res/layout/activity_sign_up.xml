@@ -6,86 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
-    <Button
-        android:id="@+id/backbtn"
-        android:layout_width="55dp"
-        android:layout_height="48dp"
-        android:background="@drawable/arrowpointingleft" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:layout_marginTop="100dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/EmailSlot"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:autofillHints="" />
+            android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/NameSlot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="10dp"
-            android:inputType="textPersonName"
-            android:hint="Username"
-            android:autofillHints="" />
+            <Button
+                android:id="@+id/backbtn"
+                android:layout_width="55dp"
+                android:layout_height="48dp"
+                android:background="@drawable/arrowpointingleft" />
 
-        <EditText
-            android:id="@+id/PasswordSlot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="10dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:autofillHints="" />
-
-        <RadioGroup
-            android:id="@+id/RadioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:onClick="checkButton">
-
-            <RadioButton
-                android:id="@+id/employee_radio_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="checkButton"
-                android:text="@string/employee" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-            <EditText
-                android:id="@+id/EnterBranchName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/EnterBranchNames"
-                android:inputType="textPersonName" />
+                <EditText
+                    android:id="@+id/EmailSlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
 
-            <RadioButton
-                android:id="@+id/customers_radio_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="checkButton"
-                android:text="@string/customer" />
-        </RadioGroup>
+                <EditText
+                    android:id="@+id/NameSlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/btnsignup2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_button"
+                <EditText
+                    android:id="@+id/PasswordSlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
 
-            android:text="@string/sign_up" />
+                <RadioGroup
+                    android:id="@+id/RadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:onClick="checkButton">
 
-    </LinearLayout>
+                    <RadioButton
+                        android:id="@+id/employee_radio_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="checkButton"
+                        android:text="@string/employee" />
+
+                    <EditText
+                        android:id="@+id/EnterBranchName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/EnterBranchNames"
+                        android:inputType="textPersonName" />
+
+                    <RadioButton
+                        android:id="@+id/customers_radio_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="checkButton"
+                        android:text="@string/customer" />
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/btnsignup2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_button"
+
+                    android:text="@string/sign_up" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>
