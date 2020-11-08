@@ -29,4 +29,10 @@
     <string name="Services">Services</string>
     <string name="EnterBranchName">Enter Branch Name</string>
     <string name="EnterBranchNames">Enter Branch Name (employees only)</string>
+    <string name="address">Address</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="number">Phone Number</string>
+    <string name="welcome">Welcome</string>
+    <string name="CompleteInfo">Complete Profile Info</string>
+    <string name="done">DONE</string>
 </resources>

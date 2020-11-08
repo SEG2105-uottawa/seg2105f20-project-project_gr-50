@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 public class SignUp extends AppCompatActivity {
 
     private Button btnsignup2;
-    private EditText email, password, name, branchName;
+    private EditText email, password, name;
     FirebaseAuth fb;
     FirebaseDatabase mDatabase;
     RadioGroup radioGroup;
@@ -44,7 +44,7 @@ public class SignUp extends AppCompatActivity {
 
             radioGroup = findViewById(R.id.RadioGroup);
 
-            branchName= findViewById(R.id.EnterBranchName);
+
 
             btnsignup2 = (Button)findViewById(R.id.btnsignup2);
             email = findViewById(R.id.EmailSlot);
@@ -76,19 +76,19 @@ public class SignUp extends AppCompatActivity {
                     final String string_email;
                     String string_password;
                     final String string_name;
-                    final String string_branchName;
+
 
                     try {
                         string_email = email.getText().toString().trim();
                         string_password = password.getText().toString().trim();
                         string_name = name.getText().toString().trim();
-                        string_branchName = branchName.getText().toString().trim();
 
 
 
 
 
-                        final Person mcitizen = new Person(string_name, radioButton.getText().toString(), string_email, string_password,string_branchName);
+
+                        final Person mcitizen = new Person(string_name, radioButton.getText().toString(), string_email, string_password);
 
                         if (!confirmInput()) {
                             return;
@@ -107,7 +107,12 @@ public class SignUp extends AppCompatActivity {
                                     mDatabase.getReference("Citizens").child(email_no_signs).setValue(mcitizen);
 
                                     Toast.makeText(SignUp.this, radioButton.getText().toString() + " account created", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), HomePage.class));
+                                    if(mcitizen.getRole().equals("customer")) {
+                                        startActivity(new Intent(getApplicationContext(), HomePage.class)); // this one for customers
+                                    }
+                                    else{
+                                        startActivity(new Intent(getApplicationContext(), Employee_welcome_page.class)); // this new one for employees
+                                    }
 
                                 } else {
                                     Toast.makeText(SignUp.this, "Error creating an account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -128,16 +133,11 @@ public class SignUp extends AppCompatActivity {
         int radioId= radioGroup.getCheckedRadioButtonId();
 
         radioButton= findViewById(radioId);
-        if(radioButton.getText().toString().equals("employee")){
-            branchName.setVisibility(View.VISIBLE);
-        }
-        else{
-            branchName.setVisibility(View.INVISIBLE);
-        }
+
     }
 
     public boolean confirmInput(){
-        if (!validEmail() | !validateName() | !validatePassword() | !validateBranchName()){
+        if (!validEmail() | !validateName() | !validatePassword() ){
             return false;
         }
         else{
@@ -194,19 +194,6 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    private boolean validateBranchName(){
-        String branchNameInput = branchName.getText().toString().trim();
-        int radioId= radioGroup.getCheckedRadioButtonId();
-        radioButton= findViewById(radioId);
 
-        if(branchNameInput.isEmpty()&&radioButton.getText().toString().equals("employee")){
-            branchName.setError("Field can't be empty");
-            return false;
-        }
-        else{
-            branchName.setError(null);
-            return true;
-        }
-    }
 
 }

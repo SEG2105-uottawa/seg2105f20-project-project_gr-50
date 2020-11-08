@@ -27,7 +27,7 @@ public class HomePage extends AppCompatActivity {
 
     private Button btnLogout;
     private TextView textV;
-    private TextView displaybranch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class HomePage extends AppCompatActivity {
                 database = FirebaseDatabase.getInstance().getReference();
 
                 textV = (TextView) findViewById(R.id.textView);
-                displaybranch = (TextView) findViewById(R.id.branchnamedisplay);
+
 
 
 
@@ -70,14 +70,6 @@ public class HomePage extends AppCompatActivity {
                                         System.out.println(citizen);
                                         String name = citizen.getName();
                                         String role = citizen.getRole();
-                                        String branch = citizen.getBranchName();
-
-                                        if (branch.equals("")){
-                                            displaybranch.setVisibility(View.GONE);
-                                        }else{
-                                            displaybranch.setText("Branch : "+branch);
-                                        }
-
 
 
                                         textV.setText("Welcome " + name + ", " + role);

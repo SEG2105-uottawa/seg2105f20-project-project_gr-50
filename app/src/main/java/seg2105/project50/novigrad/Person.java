@@ -7,18 +7,18 @@ class Person {
         private String role;
         private String email;
         private String password;
-        private String branchName;
+
 
         Person(){
 
         }
 
-        Person(String name, String role, String email, String password, String branchName){
+        Person(String name, String role, String email, String password){
             this.name = name;
             this.role = role;
             this.email = email;
             this.password = password;
-            this.branchName= branchName;
+
         }
         public String getName(){
             return name;
@@ -32,7 +32,7 @@ class Person {
         public String getPassword(){
             return password;
         }
-        public String getBranchName(){return branchName;}
+
 
 
 }

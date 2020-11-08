@@ -10,7 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ServicesAvailable"></activity>
+        <activity android:name=".Private_approve_requests"></activity>
+        <activity android:name=".Private_my_hours" />
+        <activity android:name=".Private_my_services" />
+        <activity android:name=".Employee_homePage" />
+        <activity android:name=".Employee_welcome_page" />
+        <activity android:name=".ServicesAvailable" />
         <activity android:name=".ServiceInfoGather" />
         <activity android:name=".ServicesEdit" />
         <activity android:name=".DeleteUsers" />

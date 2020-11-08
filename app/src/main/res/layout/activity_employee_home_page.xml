@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Employee_homePage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/my_services"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="myservice"
+            android:text="MY SERVICES"
+            android:translationY="80dp" />
+
+        <Button
+            android:id="@+id/my_hours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="myhours"
+            android:text="MY HOURS"
+            android:translationY="90dp" />
+
+        <Button
+            android:id="@+id/approve_requests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="approverequest"
+            android:text="APPROVE REQUESTS"
+            android:translationY="100dp" />
+
+        <Button
+            android:id="@+id/log_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="logout"
+            android:text="LOGOUT"
+            android:translationY="200dp" />
+    </LinearLayout>
+</RelativeLayout>

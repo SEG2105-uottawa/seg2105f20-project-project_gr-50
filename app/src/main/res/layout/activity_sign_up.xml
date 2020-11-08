@@ -71,14 +71,6 @@
                         android:onClick="checkButton"
                         android:text="@string/employee" />
 
-                    <EditText
-                        android:id="@+id/EnterBranchName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/EnterBranchNames"
-                        android:inputType="textPersonName" />
-
                     <RadioButton
                         android:id="@+id/customers_radio_btn"
                         android:layout_width="match_parent"

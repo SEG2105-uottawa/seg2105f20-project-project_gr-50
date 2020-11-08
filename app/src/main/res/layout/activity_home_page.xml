@@ -20,13 +20,6 @@
             android:gravity="center"
             android:text="@string/greeting" />
 
-        <TextView
-            android:id="@+id/branchnamedisplay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="TextView" />
-
         <Button
             android:id="@+id/button3"
             android:layout_width="134dp"
