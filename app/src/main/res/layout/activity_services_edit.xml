@@ -54,62 +54,74 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="100dp"
                     android:orientation="vertical">
 
-                    <RadioGroup
-                        android:id="@+id/servicechoice"
+                    <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
 
-                        <RadioButton
-                            android:id="@+id/ser_service1"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Service 1" />
+                            android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/ser_service2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Service 2" />
+                            <RadioGroup
+                                android:id="@+id/servicechoice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                        <RadioButton
-                            android:id="@+id/ser_service3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Service 3" />
+                                <RadioButton
+                                    android:id="@+id/ser_service1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 1" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Service 4" />
+                                <RadioButton
+                                    android:id="@+id/ser_service2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 2" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Service 5" />
+                                <RadioButton
+                                    android:id="@+id/ser_service3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 3" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Service 6" />
+                                <RadioButton
+                                    android:id="@+id/radioButton2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 4" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Service 7" />
+                                <RadioButton
+                                    android:id="@+id/radioButton3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 5" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Service 8" />
-                    </RadioGroup>
+                                <RadioButton
+                                    android:id="@+id/radioButton4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 6" />
+
+                                <RadioButton
+                                    android:id="@+id/radioButton5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 7" />
+
+                                <RadioButton
+                                    android:id="@+id/radioButton6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service 8" />
+                            </RadioGroup>
+                        </LinearLayout>
+                    </ScrollView>
+
                 </LinearLayout>
 
                 <TextView
