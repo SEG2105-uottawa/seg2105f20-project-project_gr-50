@@ -35,4 +35,5 @@
     <string name="welcome">Welcome</string>
     <string name="CompleteInfo">Complete Profile Info</string>
     <string name="done">DONE</string>
+    <string name="title_activity_admin_service_view">adminServiceView</string>
 </resources>

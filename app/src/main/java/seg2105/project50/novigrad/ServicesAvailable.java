@@ -45,6 +45,8 @@ public class ServicesAvailable extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_available);
 
@@ -314,8 +316,16 @@ public class ServicesAvailable extends AppCompatActivity {
         startActivity(intent);
     }
     public void takeHome(View view){
-        finish();
-        startActivity(new Intent(getApplicationContext(), HomePage.class));
+        Bundle extras = getIntent().getExtras();
+        String ser_num = extras.getString("code").trim();
+
+        if(ser_num.equals("admin")){
+            finish();
+            startActivity(new Intent(getApplicationContext(), Admin.class));
+        }else {
+            finish();
+            startActivity(new Intent(getApplicationContext(), HomePage.class));
+        }
     }
 }
 
