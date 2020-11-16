@@ -30,12 +30,16 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser User;
     private DatabaseReference database;
     private Person citizen;
+    private boolean nullonce = false;
+    private boolean nulltwice = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        nullonce = false;
+        nulltwice = false;
         emailTextView = findViewById(R.id.editTextTextEmailAddress);
         passwordTextView = findViewById(R.id.editTextTextPassword);
         auth= FirebaseAuth.getInstance();
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),Admin.class));
                     return;
                 }
+
                 try {
                     auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -74,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                                         citizen = dataSnapshot.getValue(Person.class);
-                                                        if (citizen != null) {
+                                                        if (citizen != null) { // I would want to check twice if null for emp and customers before saying disabled.
                                                             String role = citizen.getRole();
-                                                            if (role.equals("employee")) {
+                                                            if (role.equals("employee")) { //this is old code but we should only find customer roles here
                                                                 finish();
                                                                 startActivity(new Intent(getApplicationContext(),
                                                                         Employee_homePage.class));
@@ -86,15 +91,10 @@ public class MainActivity extends AppCompatActivity {
                                                                         HomePage.class));
                                                             }
                                                         }
-                                                        else{
-                                                            finish(); //added
-                                                            auth.signOut(); // added
-                                                            Toast.makeText(MainActivity.this, "Account disabled", Toast.LENGTH_SHORT).show(); //added
-                                                            Toast.makeText(MainActivity.this, "Account disabled", Toast.LENGTH_SHORT).show();
-
-                                                            startActivity(new Intent(MainActivity.this, MainActivity.class)); //added
-                                                            finish();
+                                                         else{
+                                                            nullonce=true;
                                                         }
+
 
                                                     }
 
@@ -103,8 +103,47 @@ public class MainActivity extends AppCompatActivity {
 
                                                     }
                                                 });
+                                        // now we want to do the same thing but check if they exist under employees first.(Branch in database)
+                                        database.child("Branch").child("Branch "+string_email).child("Branch Info").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                BranchInfo employee= dataSnapshot.getValue(BranchInfo.class);
+                                                if (employee != null) { // I would want to check twice if null for emp and customers before saying disabled.
+                                                    String role = employee.getRole();
+                                                    if (role.equals("employee")) {
+                                                        finish();
+                                                        startActivity(new Intent(getApplicationContext(),
+                                                                Employee_homePage.class));
+                                                    } else { // we should never find anything other than employee role here if employee is not null
+                                                        finish();
+                                                        startActivity(new Intent(getApplicationContext(),
+                                                                HomePage.class));
+                                                    }
+                                                }
+                                                else{
+                                                    nulltwice=true;
+                                                }
+
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+
+                                    if(nullonce&&nulltwice){  //the account information is not found in either customer section or employee section
+                                        auth.signOut();
+                                        Toast.makeText(getApplicationContext(), "Account Disabled", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Account Disabled", Toast.LENGTH_LONG).show();
+                                        finish();
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                     }
-                                    else {
+
+                               //---------------------------------
+                                    }
+                                    else { // this means firebase authentication did not find the email and password.
                                         Toast.makeText(getApplicationContext(), "Login failed...", Toast.LENGTH_LONG).show();
                                     }
                                 }

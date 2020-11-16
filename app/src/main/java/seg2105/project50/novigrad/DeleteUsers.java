@@ -28,7 +28,7 @@ import java.util.List;
 
 public class DeleteUsers extends AppCompatActivity {
 
-
+    DatabaseReference databaseEmployees; //just made another variable, so i dont break the code that was already there when i added new things
     private EditText emailAddy;
     FirebaseAuth fb;
     FirebaseDatabase mDatabase;
@@ -42,6 +42,7 @@ public class DeleteUsers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_users);
 
+        databaseEmployees = FirebaseDatabase.getInstance().getReference("Branch");
         fb = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         databaseUsers = FirebaseDatabase.getInstance().getReference("Citizens");
@@ -69,12 +70,16 @@ public class DeleteUsers extends AppCompatActivity {
             public void onClick(View view) {
                 String string_emailAddy;
                 DatabaseReference dR;
+                DatabaseReference mR;
                 try {
 
                     string_emailAddy = emailAddy.getText().toString().trim();
                     if(!(string_emailAddy.isEmpty())) { // otherwise empty value erases the whole database!
-                        dR = FirebaseDatabase.getInstance().getReference("Citizens").child(string_emailAddy);
+                        dR = FirebaseDatabase.getInstance().getReference("Citizens").child(string_emailAddy); //attempt to remove the info from customer section.
                         dR.removeValue();
+                        mR = FirebaseDatabase.getInstance().getReference("Branch").child("Branch "+string_emailAddy);
+                        mR.removeValue(); // attempt to remove the user if it exists in employee section.
+                                          // If it doesn't exist there, nothing actually happens in database.
 
                         Toast.makeText(DeleteUsers.this, string_emailAddy+" has been deleted", Toast.LENGTH_SHORT).show();
 
@@ -100,8 +105,59 @@ public class DeleteUsers extends AppCompatActivity {
     }
 
     protected void onStart(){
-        super.onStart();;
+        super.onStart();
+        users.clear();
 
+    //--------------------------------------------------------------------------
+         //I have to iterate through branch and show all employees there. add it to list
+        // Then iterate through citizens and show all the customers there. add it to list
+        //after doing both, i show what the content of the list is.
+        databaseEmployees.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                users.clear();
+
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    BranchInfo userID = postSnapshot.child("Branch Info").getValue(BranchInfo.class);
+
+
+                    if(userID!=null) { //incase we are iterating through other children of branches, ie serviceRequest
+                        users.add(userID.getEmail()+"  ("+userID.getRole()+")");
+
+                    }
+                }
+               // ArrayAdapter<String> namesOfUsers = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1 ,users);
+              // listviewUsers.setAdapter(namesOfUsers);
+    //-----------------------------------------------------
+                databaseUsers.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //users.clear();
+
+                        for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                            Person userID = postSnapshot.getValue(Person.class);
+                            users.add(userID.getEmail()+"  ("+userID.getRole()+")");
+                        }
+                        ArrayAdapter<String> namesOfUsers = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1 ,users);
+                        listviewUsers.setAdapter(namesOfUsers);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    //-----------------------------------------------------
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+      //-------------  ------------------------------------------
         databaseUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -109,10 +165,36 @@ public class DeleteUsers extends AppCompatActivity {
 
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Person userID = postSnapshot.getValue(Person.class);
-                    users.add(userID.getEmail());
+                   users.add(userID.getEmail()+"  ("+userID.getRole()+")");
                 }
-                ArrayAdapter<String> namesOfUsers = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1 ,users);
-                listviewUsers.setAdapter(namesOfUsers);
+                //ArrayAdapter<String> namesOfUsers = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1 ,users);
+               // listviewUsers.setAdapter(namesOfUsers);
+    //---------------------------------------
+                databaseEmployees.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //users.clear();
+
+                        for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                            BranchInfo userID = postSnapshot.child("Branch Info").getValue(BranchInfo.class);
+
+
+                            if(userID!=null) { //incase we are iterating through other children of branches, ie serviceRequest
+                                users.add(userID.getEmail()+"  ("+userID.getRole()+")");
+
+                            }
+                        }
+                         ArrayAdapter<String> namesOfUsers = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1 ,users);
+                         listviewUsers.setAdapter(namesOfUsers);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+    //-------------------------------------------
             }
 
             @Override

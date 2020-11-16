@@ -75,13 +75,12 @@ public class HomePage extends AppCompatActivity {
                                         textV.setText("Welcome " + name + ", " + role);
                                     }
                                     else{
-                                        finish(); //added
-                                        auth.signOut(); // added
-                                        Toast.makeText(HomePage.this, "Account disabled", Toast.LENGTH_SHORT).show(); //added
-                                        Toast.makeText(HomePage.this, "Account disabled", Toast.LENGTH_SHORT).show();
-
-                                        startActivity(new Intent(HomePage.this, MainActivity.class)); //added
-                                        finish();
+                                        //there wont be anything to do here
+                                        //we shouldnt enter here
+                                        //MainActivity only sends valid customers to this page
+                                        //no disabled customer is able to come to this page
+                                        //Also no employee comes to this page.
+                                        //All logged in employees go straight to employee_homepage. :D
                                     }
 
                                 }

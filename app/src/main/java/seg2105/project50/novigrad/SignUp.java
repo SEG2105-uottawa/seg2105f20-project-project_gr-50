@@ -104,7 +104,18 @@ public class SignUp extends AppCompatActivity {
                                         }
                                     }
 
-                                    mDatabase.getReference("Citizens").child(email_no_signs).setValue(mcitizen);
+                                    //we should first be checking if the role is customer
+                                    // if it is then do this setting.
+                                    // otherwise we want to save all employee information
+                                    //seperately in Branch child, not Citizens.
+                                    if(mcitizen.getRole().equals("customer")) {
+                                        mDatabase.getReference("Citizens").child(email_no_signs).setValue(mcitizen);
+                                    }else{ // we store the emp data in branch with empty address and number for now. the next activity will update these values.
+                                        //Toast.makeText(SignUp.this, "passing name 1st:" + mcitizen.getName(), Toast.LENGTH_SHORT).show();
+
+                                        BranchInfo allEmpInfo = new BranchInfo("","",mcitizen.getName(),mcitizen.getEmail(),mcitizen.getPassword(),mcitizen.getRole());
+                                        mDatabase.getReference("Branch").child("Branch "+email_no_signs).child("Branch Info").setValue(allEmpInfo);
+                                    }
 
                                     Toast.makeText(SignUp.this, radioButton.getText().toString() + " account created", Toast.LENGTH_SHORT).show();
                                     if(mcitizen.getRole().equals("customer")) {
