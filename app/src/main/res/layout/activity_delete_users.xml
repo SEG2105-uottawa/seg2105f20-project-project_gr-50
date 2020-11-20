@@ -11,6 +11,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text='Enter email with no "@","." ie johngmailcom'
+            android:textColor="#0B0B0B"
+            android:textSize="18sp"
+            android:translationX="90dp"
+            android:translationY="60dp" />
+
         <Button
             android:id="@+id/back_from_delete"
             android:layout_width="61dp"
@@ -37,7 +48,9 @@
         <ListView
             android:id="@+id/allUsers"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+        </ListView>
 
     </LinearLayout>
 

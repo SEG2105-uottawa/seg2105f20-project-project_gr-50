@@ -105,8 +105,14 @@ public class Employee_welcome_page extends AppCompatActivity {
                                          password = oldBranchStuff.getPassword();
                                          role = oldBranchStuff.getRole();
 
+                                         //the hours part has nothing to do with this data change, but i just coded it here,
+                                        //because it is part of the set up process for employee accounts
+                                        // I give all new employees hours of CLOSED...they can change this later on when they sign in
+                                        //the changes will be reflected up in the database as well.
+                                         Hours defaultHours = new Hours("CLOSED","CLOSED","CLOSED","CLOSED","CLOSED","CLOSED","CLOSED");
                                         BranchInfo newInfo = new BranchInfo(string_address,string_number,name,email,password,role); // :D happy!..updated!!
                                         mDatabase.child("Branch").child("Branch "+branchName).child("Branch Info").setValue(newInfo); // branchname in database is just "Branch "+their email converted
+                                        mDatabase.child("Branch").child("Branch "+branchName).child("Hours").setValue(defaultHours);
                                         startActivity(new Intent(getApplicationContext(),Employee_homePage.class));
                                         }
                                     else {

@@ -13,7 +13,8 @@
         <activity
             android:name=".adminServiceView"
             android:label="@string/title_activity_admin_service_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="MissingClass"></activity>
         <activity android:name=".Private_approve_requests" />
         <activity android:name=".Private_my_hours" />
         <activity android:name=".Private_my_services" />
@@ -25,6 +26,7 @@
         <activity android:name=".DeleteUsers" />
         <activity android:name=".Admin" />
         <activity android:name=".HomePage" />
+        <activity android:name=".View_hours_page" />
         <activity
             android:name=".SignUp"
             android:label="@string/title_activity_sign_up"
