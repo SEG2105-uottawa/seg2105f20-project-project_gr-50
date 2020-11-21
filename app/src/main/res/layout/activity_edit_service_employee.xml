@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ServiceInfoGather">
+    tools:context=".EditServiceEmployee">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,11 +16,11 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="takeHome"
-                android:text="home" />
+                android:id="@+id/button51"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/arrowpointingleft"
+                android:onClick="takeBack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,65 +43,102 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:gravity="center"
-                    android:text="Please type the needed informations"
+                    android:text="Needed informations"
                     android:textSize="19dp" />
 
-                <EditText
-                    android:id="@+id/ser1_fn"
+                <TextView
+                    android:id="@+id/ser2_fn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:textSize="20sp"
                     android:hint="First name" />
 
-                <EditText
-                    android:id="@+id/ser1_ln"
+                <TextView
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    android:id="@+id/ser2_ln"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Last name" />
 
-                <EditText
-                    android:id="@+id/ser1_db"
+                <TextView
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    android:id="@+id/ser2_db"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Date of birth"
                     android:inputType="date" />
 
-                <EditText
-                    android:id="@+id/ser1_ad"
+                <TextView
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    android:id="@+id/ser2_ad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Address" />
 
-                <EditText
-                    android:id="@+id/ser1_pr"
+                <TextView
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    android:id="@+id/ser2_pr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Proof of residence" />
 
-                <EditText
-                    android:id="@+id/ser1_ps"
+                <TextView
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    android:id="@+id/ser2_ps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Proof of status" />
 
-                <EditText
-                    android:id="@+id/ser1_id"
+                <TextView
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    android:id="@+id/ser2_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ID number"
                     android:inputType="number" />
 
-                <EditText
-                    android:id="@+id/ser1_dv"
+                <TextView
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    android:id="@+id/ser2_dv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Driver's license type" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="100dp">
+
                 <Button
                     android:id="@+id/active"
-                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Done" />
+                    android:onClick="deactivate"
+                    android:text="disable" />
 
+                <Button
+                    android:id="@+id/no_active"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="activate"
+                    android:text="activate" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

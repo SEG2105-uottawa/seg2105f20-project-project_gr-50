@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +44,7 @@ public class ServiceInfoGather extends AppCompatActivity {
         setContentView(R.layout.activity_service1);
 
         Bundle extras = getIntent().getExtras();
-        String ser_num = extras.getString("ser_num").trim();
+        final String ser_num = extras.getString("ser_num").trim();
 
 
         auth = FirebaseAuth.getInstance();
@@ -65,7 +64,7 @@ public class ServiceInfoGather extends AppCompatActivity {
                         else{
                             startActivity(new Intent(getApplicationContext(), HomePage.class)); //added
                             finish();
-                            //TODO make a toast , "something went wrong"
+                            Toast.makeText(getApplicationContext(),"Service's no longer offered", Toast.LENGTH_LONG);
                         }
 
                         fn = (EditText)findViewById(R.id.ser1_fn);
@@ -113,13 +112,11 @@ public class ServiceInfoGather extends AppCompatActivity {
 
 
 
-        Button done = (Button)findViewById(R.id.button);
+        Button done = (Button)findViewById(R.id.active);
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
 
 
 
@@ -131,7 +128,6 @@ public class ServiceInfoGather extends AppCompatActivity {
                 String text_ps = ps.getText().toString().trim();
                 String text_id = id.getText().toString().trim();
                 String text_dv = dv.getText().toString().trim();
-                String name = serviceName.getText().toString().trim();
 
                 if (!checkFields(text_fn,text_ln,text_db,text_ad,text_pr,text_ps,text_id,text_dv)){
                     Toast.makeText(getApplicationContext(), "All fields should be filled",
@@ -139,15 +135,17 @@ public class ServiceInfoGather extends AppCompatActivity {
                     return;
                 }
 
-                String dbPath = "service-"+name;
+                Bundle extras = getIntent().getExtras();
+                String ser_branch = extras.getString("ser_branch").trim();
+
+                //String dbPath = "service-"+name;
 
                 String[] info = {text_fn, text_ln, text_db, text_ad, text_pr, text_ps
                                 ,text_id,text_dv};
-                ServicesInfo infoServ = new ServicesInfo(info);
+                ServicesInfo infoServ = new ServicesInfo(info, ser_num);
 
-                database = FirebaseDatabase.getInstance().getReference();
-                database.child("dbPath").child(name).child(user.getUid()).setValue(infoServ);
-
+                database.child("Branch").child(ser_branch).child("Request").child(generateCustomerName(user.getEmail())).child(ser_num).setValue(infoServ);
+                Log.d("tag",ser_branch);
                 Toast.makeText(getApplicationContext(), "Request sent, you will get an answer within two weeks",
                         Toast.LENGTH_LONG).show();
 
@@ -157,6 +155,16 @@ public class ServiceInfoGather extends AppCompatActivity {
 
 
 
+    }
+
+    public String generateCustomerName(String string_email){
+        String email_no_signs="";
+        for(int i =0;i<string_email.length();i++){
+            if(string_email.charAt(i)!='@'&&string_email.charAt(i)!='.'){
+                email_no_signs+=string_email.charAt(i);
+            }
+        }
+        return email_no_signs;
     }
 
     public void takeHome(View view){

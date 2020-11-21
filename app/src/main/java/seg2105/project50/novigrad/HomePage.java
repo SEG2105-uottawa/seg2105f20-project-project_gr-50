@@ -114,9 +114,9 @@ public class HomePage extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
-    public void servicesAvailable(View view){
+    public void customerBranchChoices(View view){
         finish();
-        Intent intent = new Intent(getApplicationContext(), ServicesAvailable.class);
+        Intent intent = new Intent(getApplicationContext(), CustomerBranchChoice.class);
         startActivity(intent);
     }
 

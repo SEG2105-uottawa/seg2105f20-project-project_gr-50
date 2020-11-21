@@ -28,6 +28,8 @@ public class ServicesEdit extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
 
     private ServicesSettings service;
+    private String ser_num;
+
 
 
     @Override
@@ -37,6 +39,9 @@ public class ServicesEdit extends AppCompatActivity {
 
         fb = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
+
+        Bundle extras = getIntent().getExtras();
+        ser_num = extras.getString("ser_name").trim();
 
 
         final EditText serviceName = (EditText)findViewById(R.id.ser_servicename);
@@ -56,8 +61,6 @@ public class ServicesEdit extends AppCompatActivity {
 
         final Button edit = (Button) findViewById(R.id.editdone);
 
-        Bundle extras = getIntent().getExtras();
-        final String ser_num = extras.getString("ser_num").trim();
 
         mDatabase.getReference().child("Services")
                 .child(ser_num)
@@ -128,6 +131,13 @@ public class ServicesEdit extends AppCompatActivity {
 
                 ServicesSettings service = new ServicesSettings(info, serviceName);
 
+                if(!(service.getName().equals(ser_num)))
+                {
+                    mDatabase.getReference().child("Services").child(ser_num).removeValue();
+                    ser_num = service.getName();
+
+                }
+
                 mDatabase.getReference().child("Services").child(ser_num).setValue(service);
                 Toast.makeText(getApplicationContext(), "Service Updated!",
                         Toast.LENGTH_LONG).show();
@@ -141,6 +151,12 @@ public class ServicesEdit extends AppCompatActivity {
         public void adminBack(View view){
         finish();
         startActivity(new Intent(getApplicationContext(),ServiceAdmin.class));
+    }
+
+    public void serviceDelete(View view){
+        mDatabase.getReference().child("Services").child(ser_num).removeValue();
+        finish();
+        startActivity(new Intent(getApplicationContext(), ServiceAdmin.class));
     }
 
     public void takeAdminToServiceView(View view){

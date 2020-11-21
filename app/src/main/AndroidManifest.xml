@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".EditServiceEmployee"></activity>
         <activity android:name=".ServiceAdmin" />
+        <activity android:name=".CustomerBranchChoice" />
         <activity android:name=".Private_approve_requests" />
         <activity android:name=".Private_my_hours" />
         <activity android:name=".Private_my_services" />

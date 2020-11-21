@@ -16,6 +16,8 @@ class ServicesSettings {
     private boolean licensetype;
     private String name;
 
+    private boolean employeeEnable;
+
 
     ServicesSettings(){}
 
@@ -55,6 +57,8 @@ class ServicesSettings {
         active = false;
         licensetype = false;
         this.name = name;
+
+        employeeEnable = false;
     }
 
     ServicesSettings(boolean[] selected, String name){
@@ -68,6 +72,16 @@ class ServicesSettings {
         active = selected[7];
         licensetype = selected[8];
         this.name = name;
+
+        employeeEnable = false;
+    }
+
+    public boolean isEmployeeEnable() {
+        return employeeEnable;
+    }
+
+    public void setEmployeeEnable(boolean employeeEnable) {
+        this.employeeEnable = employeeEnable;
     }
 
     public boolean isFirstname() {

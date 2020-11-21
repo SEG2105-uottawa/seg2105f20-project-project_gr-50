@@ -79,7 +79,7 @@ public class ServiceAdmin extends AppCompatActivity {
     public void goEditService(String service_name){
         finish();
         Intent intent = new Intent(getApplicationContext(), ServicesEdit.class);
-        intent.putExtra("ser_num", service_name);
+        intent.putExtra("ser_name", service_name);
         startActivity(intent);
     }
 
@@ -126,6 +126,8 @@ public class ServiceAdmin extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
+
+
 
         ArrayAdapter listAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
         listview.setAdapter(listAdapter);

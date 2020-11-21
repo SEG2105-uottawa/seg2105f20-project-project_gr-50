@@ -135,11 +135,31 @@
                     android:layout_height="wrap_content"
                     android:text="First Name" />
 
-                <Button
-                    android:id="@+id/editdone"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Done" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="60dp">
+
+                    <Button
+                        android:id="@+id/delete_service"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        android:onClick="serviceDelete"
+                        android:text="Delete"
+                        android:background="@drawable/rounded_button_red"/>
+
+                    <Button
+                        android:id="@+id/editdone"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Done" />
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

@@ -14,6 +14,9 @@ class ServicesInfo {
     private String idnumber;
     private String licensetype;
 
+    private String serviceName;
+
+
     public String getLicensetype() {
         return licensetype;
     }
@@ -25,15 +28,17 @@ class ServicesInfo {
     ServicesInfo(){
         firstname = "";
         lastname = "";
-        dateofbirth = "info[2]";
+        dateofbirth = "";
         adress = "";
         proofofresidence = "";
         proofofstatus = "";
         idnumber = "";
         licensetype = "";
+
+        serviceName = "";
     }
 
-    ServicesInfo(String[] info){
+    ServicesInfo(String[] info, String serviceName){
         firstname = info[0];
         lastname = info[1];
         dateofbirth = info[2];
@@ -42,8 +47,17 @@ class ServicesInfo {
         proofofstatus = info[5];
         idnumber = info[6];
         licensetype = info[7];
+
+        this.serviceName = serviceName;
+
     }
 
+    public String getServiceName(){
+        return serviceName;
+    }
+    public void setServiceName(String serviceName){
+        this.serviceName = serviceName;
+    }
     public String getFirstname() {
         return firstname;
     }

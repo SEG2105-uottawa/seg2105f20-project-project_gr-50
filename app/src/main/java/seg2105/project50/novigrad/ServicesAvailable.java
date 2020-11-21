@@ -33,6 +33,8 @@ public class ServicesAvailable extends AppCompatActivity {
     TextView noService;
 
     private ServicesSettings service;
+    private boolean ActivatedService = false;
+    private String ser_num;
 
     ArrayList<String> list = new ArrayList<>();
 
@@ -49,8 +51,10 @@ public class ServicesAvailable extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
+        Bundle extras = getIntent().getExtras();
+        ser_num = extras.getString("ser_num").trim();
 
-        database.child("Services")
+        database.child("Branch").child(ser_num).child("Services")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange( DataSnapshot ServiceSnapshot) {
@@ -68,6 +72,7 @@ public class ServicesAvailable extends AppCompatActivity {
                                     String name = service.getName();
                                     list.add(name);
                                     listview.requestLayout();
+                                    ActivatedService = true;
                                 }
                             } else {
                                 startActivity(new Intent(getApplicationContext(), HomePage.class)); //added
@@ -75,6 +80,11 @@ public class ServicesAvailable extends AppCompatActivity {
                                 //TODO make a toast , "something went wrong"
                             }
 
+                        }
+
+                        if(!ActivatedService){
+                            noService = (TextView)findViewById(R.id.noService);
+                            noService.setText("No services available at the moment");
                         }
 
                     }
@@ -93,6 +103,7 @@ public class ServicesAvailable extends AppCompatActivity {
                 finish();
                 Intent intent = new Intent(getApplicationContext(), ServiceInfoGather.class);
                 intent.putExtra("ser_num", name);
+                intent.putExtra("ser_branch", ser_num);
                 startActivity(intent);
             }
         });
