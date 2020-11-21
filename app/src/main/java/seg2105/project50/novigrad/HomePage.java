@@ -117,7 +117,6 @@ public class HomePage extends AppCompatActivity {
     public void servicesAvailable(View view){
         finish();
         Intent intent = new Intent(getApplicationContext(), ServicesAvailable.class);
-        intent.putExtra("code", "NoAdmin");
         startActivity(intent);
     }
 

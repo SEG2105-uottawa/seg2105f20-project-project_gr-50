@@ -19,22 +19,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="left">
 
                 <Button
                     android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="adminHome"
-                    android:text="home" />
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/arrowpointingleft"
+                    android:onClick="adminBack"
+                    android:scaleType="fitCenter" />
 
-                <Button
-                    android:id="@+id/button7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="130dp"
-                    android:text="ServicesView"
-                    android:onClick="takeAdminToServiceView"/>
             </LinearLayout>
 
             <LinearLayout
@@ -43,86 +38,6 @@
                 android:layout_marginBottom="50dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
-                    android:text="Choose the service to edit"
-                    android:textSize="16dp"></TextView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="vertical">
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RadioGroup
-                                android:id="@+id/servicechoice"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <RadioButton
-                                    android:id="@+id/ser_service1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 1" />
-
-                                <RadioButton
-                                    android:id="@+id/ser_service2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 2" />
-
-                                <RadioButton
-                                    android:id="@+id/ser_service3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 3" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 4" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 5" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 6" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 7" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton6"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Service 8" />
-                            </RadioGroup>
-                        </LinearLayout>
-                    </ScrollView>
-
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/ser_service"

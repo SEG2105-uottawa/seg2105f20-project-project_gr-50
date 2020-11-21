@@ -42,7 +42,6 @@ public class ServicesEdit extends AppCompatActivity {
         final EditText serviceName = (EditText)findViewById(R.id.ser_servicename);
 
 
-        final RadioGroup serviceChoice = (RadioGroup) findViewById(R.id.servicechoice);
         final RadioGroup serviceState = (RadioGroup)findViewById(R.id.servicechoicestate);
 
         final CheckBox firstname = (CheckBox) findViewById(R.id.ser_firstname);
@@ -57,18 +56,57 @@ public class ServicesEdit extends AppCompatActivity {
 
         final Button edit = (Button) findViewById(R.id.editdone);
 
+        Bundle extras = getIntent().getExtras();
+        final String ser_num = extras.getString("ser_num").trim();
+
+        mDatabase.getReference().child("Services")
+                .child(ser_num)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot dataSnapshot) {
+                        service = dataSnapshot.getValue(ServicesSettings.class);
+                        if(service!= null) {}
+                        else{
+                            startActivity(new Intent(getApplicationContext(), Admin.class)); //added
+                            finish();
+                            Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
+                        }
+
+                        serviceName.setText(service.getName());
+
+                        firstname.setChecked(service.isFirstname());
+                        lasttname.setChecked(service.isLastname());
+                        dateofbirth.setChecked(service.isDateofbirth());
+                        adress.setChecked(service.isAdress());
+                        proofofresidence.setChecked(service.isProofofresidence());
+                        proofofstatus.setChecked(service.isProofofstatus());
+                        idnumber.setChecked(service.isIdnumber());
+                        dvlicense.setChecked(service.isLicensetype());
+
+                        if (service.isActive()){
+                            serviceState.check(R.id.ser_activate);
+                        }
+                        else{
+                            serviceState.check(R.id.ser_disable);
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                int selecChoice = serviceChoice.getCheckedRadioButtonId();
                 int selecState = serviceState.getCheckedRadioButtonId();
 
-                RadioButton r1 = (RadioButton) findViewById(selecChoice);
                 RadioButton r2 = (RadioButton) findViewById(selecState);
 
-                final String selectedChoise = r1.getText().toString().trim();
                 String selectedState = r2.getText().toString().trim();
 
                 boolean firstnameCheck = firstname.isChecked();
@@ -90,68 +128,19 @@ public class ServicesEdit extends AppCompatActivity {
 
                 ServicesSettings service = new ServicesSettings(info, serviceName);
 
-                mDatabase.getReference().child("Services").child(selectedChoise).setValue(service);
+                mDatabase.getReference().child("Services").child(ser_num).setValue(service);
                 Toast.makeText(getApplicationContext(), "Service Updated!",
                         Toast.LENGTH_LONG).show();
 
             }
         });
 
-        serviceChoice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-                RadioButton selectedService = (RadioButton) findViewById(i);
-                String selectedServiceString = selectedService.getText().toString().trim();
-
-
-
-
-                mDatabase.getReference().child("Services")
-                        .child(selectedServiceString)
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange( DataSnapshot dataSnapshot) {
-                                service = dataSnapshot.getValue(ServicesSettings.class);
-                                if(service!= null) {}
-                                else{
-                                    startActivity(new Intent(getApplicationContext(), Admin.class)); //added
-                                    finish();
-                                    Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
-                                }
-
-                                serviceName.setText(service.getName());
-
-                                firstname.setChecked(service.isFirstname());
-                                lasttname.setChecked(service.isLastname());
-                                dateofbirth.setChecked(service.isDateofbirth());
-                                adress.setChecked(service.isAdress());
-                                proofofresidence.setChecked(service.isProofofresidence());
-                                proofofstatus.setChecked(service.isProofofstatus());
-                                idnumber.setChecked(service.isIdnumber());
-                                dvlicense.setChecked(service.isLicensetype());
-
-                                if (service.isActive()){
-                                    serviceState.check(R.id.ser_activate);
-                                }
-                                else{
-                                    serviceState.check(R.id.ser_disable);
-                                }
-
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                            }
-                        });
-
-            }
-        });
 
     }
 
-        public void adminHome(View view){
+        public void adminBack(View view){
         finish();
-        startActivity(new Intent(getApplicationContext(),Admin.class));
+        startActivity(new Intent(getApplicationContext(),ServiceAdmin.class));
     }
 
     public void takeAdminToServiceView(View view){

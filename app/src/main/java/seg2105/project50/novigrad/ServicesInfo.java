@@ -22,7 +22,16 @@ class ServicesInfo {
         this.licensetype = licensetype;
     }
 
-    ServicesInfo(){}
+    ServicesInfo(){
+        firstname = "";
+        lastname = "";
+        dateofbirth = "info[2]";
+        adress = "";
+        proofofresidence = "";
+        proofofstatus = "";
+        idnumber = "";
+        licensetype = "";
+    }
 
     ServicesInfo(String[] info){
         firstname = info[0];

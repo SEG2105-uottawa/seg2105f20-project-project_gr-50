@@ -67,7 +67,6 @@ public class ServiceInfoGather extends AppCompatActivity {
                             finish();
                             //TODO make a toast , "something went wrong"
                         }
-                        Log.d("MyApp",service.getName());
 
                         fn = (EditText)findViewById(R.id.ser1_fn);
                         ln = (EditText)findViewById(R.id.ser1_ln);

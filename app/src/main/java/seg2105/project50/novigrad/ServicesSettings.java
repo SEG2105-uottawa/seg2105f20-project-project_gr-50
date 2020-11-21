@@ -44,6 +44,19 @@ class ServicesSettings {
         this.name = name;
     }
 
+    ServicesSettings(String name){
+        firstname = true;
+        lastname = true;
+        dateofbirth = false;
+        adress = false;
+        proofofresidence = false;
+        proofofstatus = false;
+        idnumber = false;
+        active = false;
+        licensetype = false;
+        this.name = name;
+    }
+
     ServicesSettings(boolean[] selected, String name){
         firstname = selected[0];
         lastname = selected[1];

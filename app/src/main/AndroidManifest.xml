@@ -10,11 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".adminServiceView"
-            android:label="@string/title_activity_admin_service_view"
-            android:theme="@style/AppTheme.NoActionBar"
-            tools:ignore="MissingClass"></activity>
+        <activity android:name=".ServiceAdmin" />
         <activity android:name=".Private_approve_requests" />
         <activity android:name=".Private_my_hours" />
         <activity android:name=".Private_my_services" />

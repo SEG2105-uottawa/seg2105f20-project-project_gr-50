@@ -16,17 +16,17 @@ public class Admin extends AppCompatActivity {
 
     public void adminOut(View view){
         finish();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     public void manageUsers(View view){
         finish();
-        startActivity(new Intent(getApplicationContext(),DeleteUsers.class));
+        startActivity(new Intent(getApplicationContext(), DeleteUsers.class));
     }
 
 
     public void manageServices(View view){
         finish();
-        startActivity(new Intent(getApplicationContext(),ServicesEdit.class));
+        startActivity(new Intent(getApplicationContext(), ServiceAdmin.class));
     }
 }
