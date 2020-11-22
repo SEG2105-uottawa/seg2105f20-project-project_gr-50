@@ -29,6 +29,8 @@ public class ServicesEdit extends AppCompatActivity {
 
     private ServicesSettings service;
     private String ser_num;
+    private BranchInfo infoservice;
+    private String global;
 
 
 
@@ -126,6 +128,10 @@ public class ServicesEdit extends AppCompatActivity {
                 EditText name = (EditText) findViewById(R.id.ser_servicename);
                 final String serviceName = name.getText().toString().trim();
 
+                if(!active){
+                    deleteServiceBranch(serviceName);
+                }
+
                 final boolean[] info = {firstnameCheck, lastnameCheck, dateofbirthCheck, adressCheck, proofofresidenceCheck
                         , proofofstatusCheck, idnumberCheck, active, dvlicenseCheck};
 
@@ -155,8 +161,42 @@ public class ServicesEdit extends AppCompatActivity {
 
     public void serviceDelete(View view){
         mDatabase.getReference().child("Services").child(ser_num).removeValue();
+        deleteServiceBranch(ser_num);
         finish();
         startActivity(new Intent(getApplicationContext(), ServiceAdmin.class));
+
+    }
+
+    public void deleteServiceBranch(String servi){
+
+        global = servi;
+        mDatabase.getReference().child("Branch").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot ServiceSnapshot) {
+                        for(DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
+                            DataSnapshot snap = dataSnapshot.child("Branch Info");
+                                infoservice = snap.getValue(BranchInfo.class);
+                                mDatabase.getReference().child("Branch").child(generateBranchName(infoservice.getEmail()))
+                                        .child("Services").child(global).removeValue();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+    }
+
+    public String generateBranchName(String string_email){
+        String email_no_signs="";
+        String data = "Branch ";
+        for(int i =0;i<string_email.length();i++){
+            if(string_email.charAt(i)!='@'&&string_email.charAt(i)!='.'){
+                email_no_signs+=string_email.charAt(i);
+            }
+        }
+        return (data+email_no_signs);
     }
 
     public void takeAdminToServiceView(View view){
