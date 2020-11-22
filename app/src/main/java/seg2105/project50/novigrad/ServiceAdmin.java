@@ -66,13 +66,18 @@ public class ServiceAdmin extends AppCompatActivity {
 
     public void addNewService(View view){
         String name = newService.getText().toString().trim();
-        database = FirebaseDatabase.getInstance().getReference();
-        ServicesSettings newService = new ServicesSettings(name);
+        if(!name.equals("")) {
+            database = FirebaseDatabase.getInstance().getReference();
+            ServicesSettings newService = new ServicesSettings(name);
 
-        database.child("Services").child(name).setValue(newService);
-        Toast.makeText(getApplicationContext(), "Service Updated!",
-                Toast.LENGTH_LONG).show();
-        refresh();
+            database.child("Services").child(name).setValue(newService);
+            Toast.makeText(getApplicationContext(), "Service Updated!",
+                    Toast.LENGTH_LONG).show();
+            refresh();
+        }else{
+            Toast.makeText(getApplicationContext(), "Can't make a service with no name!",
+                    Toast.LENGTH_LONG).show();
+        }
 
     }
 
