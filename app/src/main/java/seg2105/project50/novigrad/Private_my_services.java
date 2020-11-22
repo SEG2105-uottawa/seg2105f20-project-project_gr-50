@@ -82,4 +82,9 @@ public class Private_my_services extends AppCompatActivity {
         finish();
         startActivity(new Intent(getApplicationContext(),Employee_homePage.class));
     }
+
+    public void take_to_view_my_activatedServices(View view){
+        finish();
+        startActivity(new Intent(getApplicationContext(),View_active_personal_service.class));
+    }
 }

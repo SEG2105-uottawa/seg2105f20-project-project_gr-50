@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View_active_personal_service">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/take_to_go_back"
+            android:layout_width="159dp"
+            android:layout_height="73dp"
+            android:background="@drawable/arrowpointingleft"
+            android:onClick="take_to_go_back"
+            android:text="Button" />
+
+        <TextView
+            android:id="@+id/listofmyactiveservices"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:gravity="center"
+            android:text="List of My Active Services"
+            android:textColor="#050505"
+            android:textSize="18sp" />
+
+        <ListView
+            android:id="@+id/view_my_active_services"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</RelativeLayout>
