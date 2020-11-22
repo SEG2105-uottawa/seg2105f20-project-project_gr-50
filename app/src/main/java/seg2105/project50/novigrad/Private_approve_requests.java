@@ -49,11 +49,11 @@ public class Private_approve_requests extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange( DataSnapshot ServiceSnapshot) {
-
+                    list.clear();
                         for(DataSnapshot dataSnapshotUp : ServiceSnapshot.getChildren()) {
                             for(DataSnapshot dataSnapshot : dataSnapshotUp.getChildren()) {
                                 service = dataSnapshot.getValue(ServicesInfo.class);
-                                list.add(service.getServiceName());
+                                list.add(service.getServiceName()+ " #From# "+dataSnapshotUp.getKey().trim()); //shows the customers email that requested it.
                                 listview.requestLayout();
                             }
                         }
@@ -63,19 +63,38 @@ public class Private_approve_requests extends AppCompatActivity {
                     }
                 });
 
+
         ArrayAdapter listAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
         listview.setAdapter(listAdapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               /* String name = (String) parent.getAdapter().getItem(position);
+               String name = (String) parent.getAdapter().getItem(position); // this will have ie. (ID #From# johngmailcom) I will split in two parts.
+               String service_type = "";
+               String customers_id = "";
+               int count =0;
+               for(int i =0;i<name.length();i++){
+                   if(name.charAt(i)!='#'&&count<1){
+                       service_type+=name.charAt(i);
+                   }
+                   if(name.charAt(i)=='#'){
+                       count++;
+                   }
+                   if(name.charAt(i)!='#'&&count>1){
+                       customers_id+=name.charAt(i);
+                   }
+
+               }
                 finish();
-                Intent intent = new Intent(getApplicationContext(), EditServiceEmployee.class);
-                intent.putExtra("ser_num", name);
+                Intent intent = new Intent(getApplicationContext(), Accept_or_delete_requests.class); // put the new activity here to delete/accept.
+                intent.putExtra("service_the_type", service_type.trim()); //particular request from list shown needed to approve/decline.
+                intent.putExtra("customer_who_sent_it",customers_id.trim()); //change name in both places
                 startActivity(intent);
 
-                */
+
+
+
 
                 //TO-DO  FINISH THAT
             }

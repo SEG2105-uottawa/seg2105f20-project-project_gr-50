@@ -171,7 +171,7 @@ public class EditServiceEmployee extends AppCompatActivity {
 
     public void takeBack(View view){
         finish();
-        startActivity(new Intent(getApplicationContext(), Employee_homePage.class));
+        startActivity(new Intent(getApplicationContext(), Private_my_services.class));
     }
 
     public String generateBranchName(String string_email){

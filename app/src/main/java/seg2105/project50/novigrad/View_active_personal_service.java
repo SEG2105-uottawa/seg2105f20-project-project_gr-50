@@ -71,7 +71,9 @@ public class View_active_personal_service extends AppCompatActivity {
                 }
 
 
-
+                if(list.size()==0){
+                    list.add("None of your services are active yet. Click them to change that.");
+                }
                 ArrayAdapter<String> hourOfUser = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1 ,list);
                 listviewMyServices.setAdapter(hourOfUser);
             }

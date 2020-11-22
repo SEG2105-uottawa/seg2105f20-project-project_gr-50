@@ -38,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="5"
-                android:hint="dont worry about this yet" />
+                android:hint="Click on a Branch to see Services" />
 
 
         </LinearLayout>

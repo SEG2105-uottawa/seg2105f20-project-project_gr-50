@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Accept_or_delete_requests">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/display_serviceType_and_customerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="111dp"
+            android:gravity="center|left"
+            android:text="TextView"
+            android:textColor="#090909"
+            android:textSize="18sp"
+            android:translationY="130dp" />
+
+        <Button
+            android:id="@+id/accept_button"
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:background="@drawable/green"
+            android:onClick="acceptClicked"
+            android:text="ACCEPT"
+            android:translationX="20dp"
+            android:translationY="190dp" />
+
+        <Button
+            android:id="@+id/decline_button"
+            android:layout_width="157dp"
+            android:layout_height="84dp"
+            android:background="#EC2222"
+            android:onClick="declineClicked"
+            android:text="DECLINE"
+            android:translationX="220dp"
+            android:translationY="110dp" />
+    </LinearLayout>
+</RelativeLayout>
