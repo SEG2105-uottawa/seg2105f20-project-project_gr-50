@@ -3,6 +3,7 @@ package seg2105.project50.novigrad;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,10 @@ public class ServiceInfoGather extends AppCompatActivity {
     EditText id ;
     EditText dv ;
     TextView serviceName;
+    public ServiceInfoGather(){} // In case any part of the code used the default constructor as empty constructor
+    public ServiceInfoGather(Context context, ServicesSettings testService){
+        service = testService;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

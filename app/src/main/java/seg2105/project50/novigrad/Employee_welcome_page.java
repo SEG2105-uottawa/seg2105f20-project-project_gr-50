@@ -40,6 +40,11 @@ public class Employee_welcome_page extends AppCompatActivity {
     private String password;
     private String role;
 
+//-----------------------------//
+    // private Instances for error messages setting;
+    private String numberErrorText;
+    private String addressErrorText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,37 +154,49 @@ public class Employee_welcome_page extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
-    private boolean validNumber(){
-        string_number = number.getText().toString().trim();
+    public boolean validNumber(String string_number){
+        //string_number = number.getText().toString().trim();
         if(string_number.isEmpty()){
-            number.setError("number cant be Empty");
+            numberErrorText = "number cant be Empty";
             return false;
         }
       //  Toast.makeText(Employee_welcome_page.this, string_number, Toast.LENGTH_SHORT).show();
 
         for(int i=0; i<string_number.length(); i++){
            if(Character.isDigit(string_number.charAt(i))==false){
-               number.setError("number should contain only digits and no spaces");
+               numberErrorText = "number should contain only digits and no spaces";
                return false;
            }
         }
+        numberErrorText = null;
        return true;  // it passes the 2 tests given so far.
     }
 
-    private boolean validAddress(){
-        string_address = address.getText().toString().trim();
+    public boolean validAddress(String string_address){
+        //string_address = address.getText().toString().trim();
         if(string_address.isEmpty()){
-            address.setError("The address can't be Empty");
+            addressErrorText = "The address can't be Empty";
             return false;
         }
+        addressErrorText = null;
         return true;  // we don't care what the input is, as long as it's not empty, it's valid enough.
     }
 
     private boolean confirmInput(){
-        if(!validAddress() | !validNumber()){
+        if(!validAddress(getAddress()) | !validNumber(getNumber())){
+            number.setError(numberErrorText);
+            address.setError(addressErrorText);
             return false; // at least one of them is not valid
         }
         return true;
+    }
+
+    public String getAddress(){
+        return address.getText().toString().trim();
+    }
+
+    public String getNumber(){
+        return number.getText().toString().trim();
     }
 
 }

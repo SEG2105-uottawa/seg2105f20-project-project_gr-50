@@ -43,17 +43,6 @@ public class SignUp extends AppCompatActivity {
     private String pwErrorText;
     private String emailErrorText;
 
-/*
-    public SignUp(Context context, String emailInput, String nameInput, String passwordInput){
-        email = new EditText(context);
-        password = new EditText(context);
-        name = new EditText(context);
-        this.email.setText(emailInput);
-        this.password.setText(passwordInput);
-        this.name.setText(nameInput);
-    }
-
- */
 
 
     @Override
@@ -172,7 +161,6 @@ public class SignUp extends AppCompatActivity {
     }
 
     public boolean validEmail(String emailInput) {
-        //String emailInput = email.getText().toString().trim();
 
         if (emailInput.isEmpty()) {
             emailErrorText = ("Field can't be empty");
@@ -187,7 +175,6 @@ public class SignUp extends AppCompatActivity {
     }
 
     public boolean validatePassword(String passwordInput) {
-        //String passwordInput = password.getText().toString().trim();
         if (passwordInput.isEmpty()) {
             pwErrorText = ("Field can't be empty");
             return false;
@@ -206,7 +193,6 @@ public class SignUp extends AppCompatActivity {
     }
 
     public boolean validateName(String nameInput) {
-        // nameInput = name.getText().toString().trim();
         if (nameInput.isEmpty()) {
             nameErrorText = "Field can't be empty";
             return false;
