@@ -1,9 +1,7 @@
 # ServiceNovigrad
 Build Status
 
-[![CircleCI](https://circleci.com/gh/SEG2105-uottawa/seg2105f20-project-project_gr-50.svg?style=svg&circle-token=0ba1d0aa1f4a8ea5ed971a61e272b42509997b63)](https://app.circleci.com/pipelines/github/SEG2105-uottawa/seg2105f20-project-project_gr-50)
-
-Deliverable 2
+Deliverable 3
 
 Student Names
 1) Hamidou Nouhoum Cisse
@@ -14,4 +12,16 @@ The credentials for the admin account are:
  email/pseudo : admin
  password : admin
 
-We have incorporated the circlCi building badge for bonus.
+The credentials for an employee account are:
+email/pseudo : henry@gmail.com
+password : 123456
+
+The credentials for a customer account are:
+email/pseudo : celia@gmail.com
+password : 123456
+
+
+
+Employee can add or delete services activated by the admin to their branch account. If admin delete or disable a service, that service will be deleted from all branches.
+
+For the request-answer implementation we are not using dummy data, customer can send request to their desired branches, and these branches can view the requests by clicking "My request" button, and then accept or decline the requests. For Deliverable 4, customers will see notifications about their requests status on their HomePage.
