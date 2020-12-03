@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.ServiceState;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,7 +57,10 @@ public class ServiceAdmin extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String service_name = (String) parent.getAdapter().getItem(position);
+                ServicesSettings service = (ServicesSettings) parent.getAdapter().getItem(position);
+                finish();
+
+                String service_name = service.getName();
                 goEditService(service_name);
             }
         });
@@ -71,7 +75,7 @@ public class ServiceAdmin extends AppCompatActivity {
             ServicesSettings newService = new ServicesSettings(name);
 
             database.child("Services").child(name).setValue(newService);
-            Toast.makeText(getApplicationContext(), "Service Updated!",
+            Toast.makeText(getApplicationContext(), "Services Updated!",
                     Toast.LENGTH_LONG).show();
             refresh();
         }else{
@@ -95,7 +99,7 @@ public class ServiceAdmin extends AppCompatActivity {
     }
 
     private void refresh(){
-        final ArrayList<String> list = new ArrayList<>();
+        final ArrayList<ServicesSettings> list = new ArrayList<>();
 
         database.child("Services")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -115,8 +119,7 @@ public class ServiceAdmin extends AppCompatActivity {
                             if (service != null && !noServ) {
 
                                 activeService[count]=service.isActive();
-                                String name = service.getName();
-                                list.add(name);
+                                list.add(service);
                                 listview.requestLayout();
 
                                 count++;
@@ -134,15 +137,16 @@ public class ServiceAdmin extends AppCompatActivity {
 
 
 
-        ArrayAdapter listAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+        ServiceDisplay listAdapter = new ServiceDisplay(this,R.layout.service_display, list);
         listview.setAdapter(listAdapter);
 
-        if(!noServ){
+        /*if(!noServ){
             int t =0;
             for (boolean i : activeService){
                 listview.setItemChecked(t, i);
                 t++;
             }
         }
+        */
     }
 }

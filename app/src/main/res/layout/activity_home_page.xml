@@ -14,6 +14,28 @@
         android:padding="35dp">
 
         <TextView
+            android:id="@+id/notif_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="No notification"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/clear_notif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:onClick="clear"
+            android:text="Clear" />
+
+        <ListView
+            android:id="@+id/notif"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"/>
+
+        <TextView
             android:id="@+id/textView"
             android:layout_width="fill_parent"
             android:layout_height="103dp"

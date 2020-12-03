@@ -34,7 +34,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
     private BranchInfo service;
     private boolean ActivatedService = false;
 
-    ArrayList<String> list = new ArrayList<>();
+    ArrayList<BranchInfo> list = new ArrayList<>();
 
 
     @Override
@@ -60,8 +60,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
                             service = dataSnapshot.getValue(BranchInfo.class);
                             if (service != null) {
 
-                                String name = service.getEmail();
-                                list.add(generateBranchName(name));
+                                list.add(service);
                                 listview.requestLayout();
 
                             } else {
@@ -80,14 +79,15 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
 
 
-        ArrayAdapter listAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list);
         listview.setAdapter(listAdapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String name = (String) parent.getAdapter().getItem(position);
+                BranchInfo branch = (BranchInfo) parent.getAdapter().getItem(position);
+                String name = generateBranchName(branch.getEmail());
                 finish();
                 Intent intent = new Intent(getApplicationContext(), ServicesAvailable.class);
                 intent.putExtra("ser_num", name);

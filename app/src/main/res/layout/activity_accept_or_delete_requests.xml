@@ -11,34 +11,122 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/display_serviceType_and_customerEmail"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="111dp"
-            android:gravity="center|left"
-            android:text="TextView"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ser3_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SERVICE"
+                android:textSize="20sp"
+                android:gravity="center"/>
+
+
+            <TextView
+                android:id="@+id/ser3_fn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:hint="First name" />
+
+            <TextView
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:id="@+id/ser3_ln"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last name" />
+
+            <TextView
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:id="@+id/ser3_db"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Date of birth"
+                android:inputType="date" />
+
+            <TextView
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:id="@+id/ser3_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address" />
+
+            <TextView
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:id="@+id/ser3_pr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Proof of residence" />
+
+            <TextView
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:id="@+id/ser3_ps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Proof of status" />
+
+            <TextView
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:id="@+id/ser3_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ID number"
+                android:inputType="number" />
+
+            <TextView
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:id="@+id/ser3_dv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Driver's license type" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/additional_info"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="additionnal information send to the customer"
             android:textColor="#090909"
             android:textSize="18sp"
-            android:translationY="130dp" />
+  />
 
-        <Button
-            android:id="@+id/accept_button"
-            android:layout_width="160dp"
-            android:layout_height="80dp"
-            android:background="@drawable/green"
-            android:onClick="acceptClicked"
-            android:text="ACCEPT"
-            android:translationX="20dp"
-            android:translationY="190dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="30dp">
 
-        <Button
-            android:id="@+id/decline_button"
-            android:layout_width="157dp"
-            android:layout_height="84dp"
-            android:background="#EC2222"
-            android:onClick="declineClicked"
-            android:text="DECLINE"
-            android:translationX="220dp"
-            android:translationY="110dp" />
+            <Button
+                android:id="@+id/accept_button"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/green"
+                android:onClick="acceptClicked"
+                android:text="ACCEPT" />
+
+            <Button
+                android:id="@+id/decline_button"
+                android:layout_width="157dp"
+                android:layout_height="40dp"
+                android:background="#EC2222"
+                android:onClick="declineClicked"
+                android:text="DECLINE" />
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

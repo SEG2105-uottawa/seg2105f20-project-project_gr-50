@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.Provider;
 import java.util.ArrayList;
 
 public class Private_my_services extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class Private_my_services extends AppCompatActivity {
     private DatabaseReference database;
     private ServicesSettings service;
     private ListView listview;
-    private ArrayList<String> list;
+    private ArrayList<ServicesSettings> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class Private_my_services extends AppCompatActivity {
                         for(DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
                             service = dataSnapshot.getValue(ServicesSettings.class);
                             if (service.isActive()) {
-                                list.add(service.getName());
+                                list.add(service);
                                 listview.requestLayout();
                             }
                         }
@@ -55,16 +56,16 @@ public class Private_my_services extends AppCompatActivity {
                     }
                 });
 
-        ArrayAdapter listAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+        ServiceDisplay listAdapter = new ServiceDisplay(this,R.layout.service_display, list);
         listview.setAdapter(listAdapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String name = (String) parent.getAdapter().getItem(position);
+                ServicesSettings service = (ServicesSettings) parent.getAdapter().getItem(position);
                 finish();
                 Intent intent = new Intent(getApplicationContext(), EditServiceEmployee.class);
-                intent.putExtra("ser_num", name);
+                intent.putExtra("ser_num", service.getName());
                 startActivity(intent);
             }
         });
