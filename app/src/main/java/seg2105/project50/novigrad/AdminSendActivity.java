@@ -58,7 +58,7 @@ public class AdminSendActivity extends AppCompatActivity {
                     finish();
                     startActivity(new Intent(getApplicationContext(),Admin.class));
                 }else{
-                    Toast.makeText(getApplicationContext(),"Please select the recipients",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Please select the recipients",Toast.LENGTH_LONG).show();
                 }
             }
         });
