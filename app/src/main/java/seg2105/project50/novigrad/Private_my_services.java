@@ -45,7 +45,7 @@ public class Private_my_services extends AppCompatActivity {
 
                         for(DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
                             service = dataSnapshot.getValue(ServicesSettings.class);
-                            if (service.isActive()) {
+                            if (service.isEmployeeEnable()) {
                                 list.add(service);
                                 listview.requestLayout();
                             }

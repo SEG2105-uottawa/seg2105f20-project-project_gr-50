@@ -122,8 +122,10 @@ public class SignUp extends AppCompatActivity {
 
                                 Toast.makeText(SignUp.this, radioButton.getText().toString() + " account created", Toast.LENGTH_SHORT).show();
                                 if (mcitizen.getRole().equals("customer")) {
+                                    finish();
                                     startActivity(new Intent(getApplicationContext(), HomePage.class)); // this one for customers
                                 } else {
+                                    finish();
                                     startActivity(new Intent(getApplicationContext(), Employee_welcome_page.class)); // this new one for employees
                                 }
 

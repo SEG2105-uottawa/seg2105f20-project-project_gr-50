@@ -118,6 +118,7 @@ public class Employee_welcome_page extends AppCompatActivity {
                                         BranchInfo newInfo = new BranchInfo(string_address,string_number,name,email,password,role); // :D happy!..updated!!
                                         mDatabase.child("Branch").child("Branch "+branchName).child("Branch Info").setValue(newInfo); // branchname in database is just "Branch "+their email converted
                                         mDatabase.child("Branch").child("Branch "+branchName).child("Hours").setValue(defaultHours);
+                                        finish();
                                         startActivity(new Intent(getApplicationContext(),Employee_homePage.class));
                                         }
                                     else {

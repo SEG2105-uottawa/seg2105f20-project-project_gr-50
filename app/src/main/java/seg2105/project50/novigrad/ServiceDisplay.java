@@ -39,7 +39,7 @@ public class ServiceDisplay extends ArrayAdapter<ServicesSettings> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String name = getItem(position).getName();
-        boolean state = getItem(position).isActive();
+        boolean state = getItem(position).isEmployeeEnable();
         String stateService = "";
 
         if(state){
