@@ -108,7 +108,7 @@ public class HomePage extends AppCompatActivity {
     private void loadNotification(){
        String bare_email = bare_email();
 
-
+        notif_list.clear();
 
         database.child("Notifications")
                 .child(bare_email)

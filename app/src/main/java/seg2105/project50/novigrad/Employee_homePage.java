@@ -55,7 +55,7 @@ public class Employee_homePage extends AppCompatActivity {
     }
 
     private void loadNotification(){
-
+        notif_list.clear();
 
         database.child("Notifications Employee")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
