@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +27,14 @@ public class BranchDisplay extends ArrayAdapter<BranchInfo> {
     private Context context;
     private DatabaseReference database;
     private FirebaseAuth auth;
+
+    //private ArrayList<String> list = new ArrayList<>();
+    String workHours;
+
+    private String temp_hours = "Loading...";
+
     private Hours hours;
+
     private int resource;
 
     public BranchDisplay(@NonNull Context context, int resource, ArrayList<BranchInfo> list) {
@@ -42,28 +50,13 @@ public class BranchDisplay extends ArrayAdapter<BranchInfo> {
         String branchName = generateBranchName(email);
         String address = getItem(position).getAddress();
 
-        Hours hours = getHours(branchName);
-        Calendar calendar = Calendar.getInstance();
-        int days = calendar.get(Calendar.DAY_OF_WEEK);
-        String workH = "";
+        //hours = new Hours("mond","tue","wds","thy","fr","sat","sun");
 
-            /*
-        switch (days){
-            case 0:
-                workH = hours.getSunday();
-            case 1:
-                workH = hours.getMonday();
-            case 2:
-                workH = hours.getTuesday();
-            case 3:
-                workH = hours.getWednesday();
-            case 4:
-                workH = hours.getThursday();
-            case 5:
-                workH = hours.getFriday();
-            case 6:
-                workH = hours.getSaturday();
-        }*/
+
+        getHours(branchName);
+
+        String workH = temp_hours;
+
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
@@ -73,13 +66,14 @@ public class BranchDisplay extends ArrayAdapter<BranchInfo> {
         TextView branc_address = (TextView)convertView.findViewById(R.id.branch_address_display);
 
         branc_address.setText(address);
-        branc_hours.setText("Hours");
+        branc_hours.setText(workH);
         branc_name.setText(branchName);
 
         return convertView;
     }
 
-    private Hours getHours (String branch){
+
+    private void getHours (String branch){
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
@@ -93,16 +87,50 @@ public class BranchDisplay extends ArrayAdapter<BranchInfo> {
                         //for(DataSnapshot dataSnapshotUp : ServiceSnapshot.getChildren()) {
                             hours = ServiceSnapshot.getValue(Hours.class);
 
-                            Log.e("workH", "hours.getFriday()");
+                        Calendar calendar = Calendar.getInstance();
+                        int days = calendar.get(Calendar.DAY_OF_WEEK);
+                        Toast.makeText(getContext(),String.valueOf(days),Toast.LENGTH_LONG).show();
+                        if(hours != null) {
+                            switch (days) {
+                                case 6:
+                                    workHours = hours.getSunday();
+                                    break;
+                                case 0:
+                                    workHours = hours.getMonday();
+                                    break;
+                                case 1:
+                                    workHours = hours.getTuesday();
+                                    break;
+                                case 2:
+                                    workHours = hours.getWednesday();
+                                    break;
+                                case 3:
+                                    workHours = hours.getThursday();
+                                    break;
+                                case 4:
+                                    workHours = hours.getFriday();
+                                    break;
+                                case 5:
+                                    workHours = hours.getSaturday();
+                                    break;
+                            }
+                            sendhours(workHours);
+                        }else {
+                            workHours = "Crashed";
+                            sendhours(workHours);
+                        }
 
-                       // }
+
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
 
-        return hours;
+    }
+
+    public void sendhours(String h){
+        temp_hours = h;
     }
 
     private String generateBranchName(String string_email){

@@ -212,7 +212,7 @@ public class Accept_or_delete_requests extends AppCompatActivity {
             finish();
             startActivity(new Intent(getApplicationContext(), Private_approve_requests.class));
         }else{
-            Toast.makeText(getApplicationContext(),"You need to add additional information if request need to be declined", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"You have to add additional information if request need to be declined", Toast.LENGTH_LONG);
         }
     }
 
