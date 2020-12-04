@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Accept_or_delete_requests"></activity>
+        <activity android:name=".AdminSendActivity"></activity>
+        <activity android:name=".Accept_or_delete_requests" />
         <activity android:name=".View_active_personal_service" />
         <activity android:name=".EditServiceEmployee" />
         <activity android:name=".ServiceAdmin" />

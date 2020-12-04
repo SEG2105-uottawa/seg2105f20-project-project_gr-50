@@ -47,6 +47,7 @@ public class ServicesEdit extends AppCompatActivity {
 
 
         final EditText serviceName = (EditText)findViewById(R.id.ser_servicename);
+        final EditText servicePrice = (EditText)findViewById(R.id.ser_serviceprice);
 
 
         final RadioGroup serviceState = (RadioGroup)findViewById(R.id.servicechoicestate);
@@ -78,6 +79,7 @@ public class ServicesEdit extends AppCompatActivity {
                         }
 
                         serviceName.setText(service.getName());
+                        servicePrice.setText(service.getPrice());
 
                         firstname.setChecked(service.isFirstname());
                         lasttname.setChecked(service.isLastname());
@@ -127,6 +129,7 @@ public class ServicesEdit extends AppCompatActivity {
 
                 EditText name = (EditText) findViewById(R.id.ser_servicename);
                 final String serviceName = name.getText().toString().trim();
+                String price = servicePrice.getText().toString().trim();
 
                 if(!active){
                     deleteServiceBranch(serviceName);
@@ -135,7 +138,7 @@ public class ServicesEdit extends AppCompatActivity {
                 final boolean[] info = {firstnameCheck, lastnameCheck, dateofbirthCheck, adressCheck, proofofresidenceCheck
                         , proofofstatusCheck, idnumberCheck, active, dvlicenseCheck};
 
-                ServicesSettings service = new ServicesSettings(info, serviceName);
+                ServicesSettings service = new ServicesSettings(info, serviceName, price);
 
                 if(!(service.getName().equals(ser_num)))
                 {

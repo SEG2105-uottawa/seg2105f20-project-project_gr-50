@@ -28,18 +28,27 @@ public class ServiceDisplay extends ArrayAdapter<ServicesSettings> {
     private FirebaseAuth auth;
     private Hours hours;
     private int resource;
+    private String userType;
 
-    public ServiceDisplay(@NonNull Context context, int resource, ArrayList<ServicesSettings> list) {
+    public ServiceDisplay(@NonNull Context context, int resource, ArrayList<ServicesSettings> list, String userType) {
         super(context, resource, list);
         this.context = context;
         this.resource = resource;
+        this.userType = userType;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String name = getItem(position).getName();
-        boolean state = getItem(position).isEmployeeEnable();
+        boolean state;
+        if(userType.equals("admin")){
+            state = getItem(position).isActive();
+        }
+        else{
+            state = getItem(position).isEmployeeEnable();
+        }
+
         String stateService = "";
 
         if(state){

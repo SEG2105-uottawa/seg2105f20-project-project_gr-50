@@ -142,6 +142,35 @@ public class HomePage extends AppCompatActivity {
 
                 });
 
+
+        database.child("Notifications All")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot ServiceSnapshot) {
+                        if (!(ServiceSnapshot.hasChildren())) {
+                        } else {
+                            noNotif.setVisibility(View.GONE);
+                            list.setVisibility(View.VISIBLE);
+                            clear.setVisibility(View.VISIBLE);
+
+                            for (DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
+                                notification = dataSnapshot.getValue(Notification.class);
+                                if (notification != null) {
+                                    notif_list.add(notification);
+                                } else {
+                                    startActivity(new Intent(getApplicationContext(), HomePage.class)); //added
+                                    finish();
+                                    Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_SHORT);
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError){
+                    }
+
+                });
+
         NotificationDisplay listAdapter = new NotificationDisplay(this,R.layout.notification_display, notif_list);
         list.setAdapter(listAdapter);
     }

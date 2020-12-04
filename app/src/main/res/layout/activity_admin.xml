@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Admin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,12 +34,20 @@
             android:translationY="-300dp"
             android:text="Manage Services" />
 
+
         <Button
             android:id="@+id/manage_users"
             android:layout_width="214dp"
             android:layout_height="wrap_content"
             android:onClick="manageUsers"
             android:text="@string/manageUsers"
+            android:translationY="-300dp" />
+        <Button
+            android:id="@+id/admin_notif"
+            android:layout_width="214dp"
+            android:onClick="sendNotfi"
+            android:layout_height="wrap_content"
+            android:text="Send notifications"
             android:translationY="-300dp" />
 
     </LinearLayout>

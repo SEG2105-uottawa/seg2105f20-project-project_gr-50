@@ -56,7 +56,7 @@ public class Private_my_services extends AppCompatActivity {
                     }
                 });
 
-        ServiceDisplay listAdapter = new ServiceDisplay(this,R.layout.service_display, list);
+        ServiceDisplay listAdapter = new ServiceDisplay(this,R.layout.service_display, list, "employee");
         listview.setAdapter(listAdapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

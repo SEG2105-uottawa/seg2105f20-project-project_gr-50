@@ -11,34 +11,64 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/my_services"
+        <TextView
+            android:id="@+id/notif_state_emp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="myservice"
-            android:text="MY SERVICES" />
+            android:textSize="30sp"
+            android:text="No notification"
+            android:gravity="center"/>
 
         <Button
-            android:id="@+id/my_hours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="myhours"
-            android:text="MY HOURS"/>
-
-        <Button
-            android:id="@+id/approve_requests"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="approverequest"
-            android:text="APPROVE REQUESTS" />
-
-        <Button
-            android:id="@+id/log_out"
+            android:id="@+id/clear_notif_emp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="logout"
-            android:text="LOGOUT"
-            android:gravity="center"
-            android:layout_gravity="center"/>
+            android:textSize="14sp"
+            android:onClick="clear"
+            android:layout_gravity="center"
+            android:text="Clear" />
+
+        <ListView
+            android:layout_margin="30dp"
+            android:id="@+id/notif_emp"
+            android:layout_width="match_parent"
+            android:layout_weight="2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/approve_requests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="approverequest"
+                android:text="APPROVE REQUESTS" />
+
+            <Button
+                android:id="@+id/my_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="myhours"
+                android:text="MY HOURS" />
+
+            <Button
+                android:id="@+id/my_services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="myservice"
+                android:text="MY SERVICES" />
+
+            <Button
+                android:id="@+id/log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:onClick="logout"
+                android:text="LOGOUT" />
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

@@ -89,7 +89,7 @@ public class BranchDisplay extends ArrayAdapter<BranchInfo> {
 
                         Calendar calendar = Calendar.getInstance();
                         int days = calendar.get(Calendar.DAY_OF_WEEK);
-                        Toast.makeText(getContext(),String.valueOf(days),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(),String.valueOf(days),Toast.LENGTH_LONG).show();
                         if(hours != null) {
                             switch (days) {
                                 case 6:

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,6 +39,8 @@ public class CustomerBranchChoice extends AppCompatActivity {
     private ListView listview;
     private ListView available_service;
 
+    private ArrayList<String> autoCompleteKey;
+
     private Hours hours;
     private String workHours;
 
@@ -46,12 +49,14 @@ public class CustomerBranchChoice extends AppCompatActivity {
     private RadioButton radioButton2;
     private RadioButton radioButton3;
 
+    private ServicesSettings settings;
+
 
     private BranchInfo service;
     private ServicesSettings service_settings;
 
     private boolean ActivatedService = false;
-    private EditText search;
+    private AutoCompleteTextView search;
     private Button searchBtn;
 
     ArrayList<BranchInfo> list = new ArrayList<>();
@@ -71,7 +76,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        search = (EditText)findViewById(R.id.branch_search);
+        search = (AutoCompleteTextView) findViewById(R.id.branch_search);
         searchBtn = (Button)findViewById(R.id.search_btn3);
 
         radioGroup = (RadioGroup)findViewById(R.id.radiogroup3);
@@ -294,8 +299,56 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
     }
 
+    public void refreshAutocompleteService(){
+        autoCompleteKey.clear();
+        database.child("Services")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot ServiceSnapshot) {
+
+                        for(DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
+                            settings = dataSnapshot.getValue(ServicesSettings.class);
+                            if (settings.isActive()) {
+                                autoCompleteKey.add(settings.getName());
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,autoCompleteKey);
+        search.setAdapter(adapter);
+    }
+
+    public void refreshAutocompleteAddress(){
+        autoCompleteKey.clear();
+        database.child("Branch")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot ServiceSnapshot) {
+                        for(DataSnapshot dataSnapshotUp : ServiceSnapshot.getChildren()) {
+                            DataSnapshot dataSnapshot = dataSnapshotUp.child("Branch Info");
+                            service = dataSnapshot.getValue(BranchInfo.class);
+                            if (service != null) {
+                               autoCompleteKey.add(service.getAddress());
+                            } else {
+                                //TODO make a toast , "something went wrong"
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,autoCompleteKey);
+        search.setAdapter(adapter);
+    }
+
     public void allBranches(){
         list.clear();
+
         database.child("Branch")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

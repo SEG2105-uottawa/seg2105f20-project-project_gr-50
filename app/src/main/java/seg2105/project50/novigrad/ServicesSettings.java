@@ -5,6 +5,8 @@ package seg2105.project50.novigrad;
  */
 class ServicesSettings {
 
+    private static final String BASIC_PRICE = "10";
+
     private boolean firstname;
     private boolean lastname;
     private boolean dateofbirth;
@@ -15,6 +17,7 @@ class ServicesSettings {
     private boolean active;
     private boolean licensetype;
     private String name;
+    private String price;
 
     private boolean employeeEnable;
 
@@ -57,11 +60,12 @@ class ServicesSettings {
         active = false;
         licensetype = false;
         this.name = name;
+        this.price = BASIC_PRICE;
 
         employeeEnable = false;
     }
 
-    ServicesSettings(boolean[] selected, String name){
+    ServicesSettings(boolean[] selected, String name, String price){
         firstname = selected[0];
         lastname = selected[1];
         dateofbirth = selected[2];
@@ -72,8 +76,17 @@ class ServicesSettings {
         active = selected[7];
         licensetype = selected[8];
         this.name = name;
+        this.price = price;
 
         employeeEnable = false;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     public boolean isEmployeeEnable() {

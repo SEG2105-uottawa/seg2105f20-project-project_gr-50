@@ -53,6 +53,14 @@
                     android:gravity="center"
                     android:hint="Service's name" />
 
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:id="@+id/ser_serviceprice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="Service's price" />
+
                 <TextView
                     android:id="@+id/ser_servicestate"
                     android:layout_width="match_parent"

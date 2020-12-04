@@ -137,7 +137,7 @@ public class ServiceAdmin extends AppCompatActivity {
 
 
 
-        ServiceDisplay listAdapter = new ServiceDisplay(this,R.layout.service_display, list);
+        ServiceDisplay listAdapter = new ServiceDisplay(this,R.layout.service_display, list, "admin");
         listview.setAdapter(listAdapter);
 
         /*if(!noServ){

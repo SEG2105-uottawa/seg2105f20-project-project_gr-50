@@ -37,6 +37,7 @@ public class EditServiceEmployee extends AppCompatActivity {
     TextView id ;
     TextView dv ;
     TextView serviceName;
+    TextView servicePrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,9 @@ public class EditServiceEmployee extends AppCompatActivity {
                         ps = (TextView)findViewById(R.id.ser2_ps);
                         id = (TextView)findViewById(R.id.ser2_id);
                         dv = (TextView)findViewById(R.id.ser2_dv);
+
+                        servicePrice = (TextView)findViewById(R.id.emp_view_price);
+                        servicePrice.setText("$ "+service.getPrice());
 
                         serviceName = (TextView)findViewById(R.id.textView3);
                         serviceName.setText(service.getName());

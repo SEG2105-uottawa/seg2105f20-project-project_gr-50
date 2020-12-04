@@ -37,6 +37,8 @@ public class ServiceInfoGather extends AppCompatActivity {
     EditText ps ;
     EditText id ;
     EditText dv ;
+    TextView price;
+
     TextView serviceName;
     public ServiceInfoGather(){} // In case any part of the code used the default constructor as empty constructor
     public ServiceInfoGather(Context context, ServicesSettings testService){
@@ -55,7 +57,6 @@ public class ServiceInfoGather extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance().getReference();
-
 
 
 
@@ -80,9 +81,11 @@ public class ServiceInfoGather extends AppCompatActivity {
                         ps = (EditText)findViewById(R.id.ser1_ps);
                         id = (EditText)findViewById(R.id.ser1_id);
                         dv = (EditText)findViewById(R.id.ser1_dv);
+                        price = (TextView)findViewById(R.id.price);
 
                         serviceName = (TextView)findViewById(R.id.textView3);
                         serviceName.setText(service.getName());
+                        price.setText("$ "+service.getPrice());
 
 
                         if (!service.isFirstname()) {

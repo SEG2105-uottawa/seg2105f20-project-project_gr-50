@@ -33,7 +33,7 @@
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/branch_search"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
