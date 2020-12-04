@@ -85,9 +85,12 @@ public class CustomerBranchChoice extends AppCompatActivity {
         radioButton2 = (RadioButton)findViewById(R.id.radioButton2);
         radioButton3 = (RadioButton)findViewById(R.id.radioButton3);
 
+        autoCompleteKey = new ArrayList<>();
+
         allBranches();
 
         refreshAvailableServices();
+        autoComplete();
 
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -226,8 +229,12 @@ public class CustomerBranchChoice extends AppCompatActivity {
                         setListview();
 
                 }
-                else if(radioButton3.isSelected()){
-
+                else if(radioButton3.isChecked()) {
+                    if (service_name.equals("")) {
+                        allBranches();
+                    } else {
+                        refreshBranch_address(service_name);
+                    }
                 }
 
 
@@ -300,7 +307,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
     }
 
     public void refreshAutocompleteService(){
-        autoCompleteKey.clear();
+
         database.child("Services")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -317,12 +324,11 @@ public class CustomerBranchChoice extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,autoCompleteKey);
-        search.setAdapter(adapter);
+
     }
 
     public void refreshAutocompleteAddress(){
-        autoCompleteKey.clear();
+
         database.child("Branch")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -342,8 +348,16 @@ public class CustomerBranchChoice extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void autoComplete(){
+        autoCompleteKey.clear();
+        refreshAutocompleteAddress();
+        refreshAutocompleteService();
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,autoCompleteKey);
         search.setAdapter(adapter);
+
     }
 
     public void allBranches(){
@@ -397,6 +411,42 @@ public class CustomerBranchChoice extends AppCompatActivity {
                             service = dataSnapshot.getValue(BranchInfo.class);
                             if (service != null) {
                                 if( dataSnapshotUp.child("Services").child(serviceN).exists()){
+                                    list.add(service);
+                                    listview.requestLayout();
+                                }
+                            } else {
+                                //startActivity(new Intent(getApplicationContext(), HomePage.class)); //added
+                                //finish();
+                                //TODO make a toast , "something went wrong"
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+
+        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list);
+        listview.setAdapter(listAdapter);
+
+
+    }
+
+    public void refreshBranch_address(final String serviceN){
+
+        list.clear();
+
+        database.child("Branch")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot ServiceSnapshot) {
+                        for(DataSnapshot dataSnapshotUp : ServiceSnapshot.getChildren()) {
+                            DataSnapshot dataSnapshot = dataSnapshotUp.child("Branch Info");
+                            service = dataSnapshot.getValue(BranchInfo.class);
+                            if (service != null) {
+                                if( service.getAddress().equals(serviceN)){
                                     list.add(service);
                                     listview.requestLayout();
                                 }
