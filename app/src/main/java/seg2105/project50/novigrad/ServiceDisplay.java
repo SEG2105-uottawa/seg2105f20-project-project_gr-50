@@ -41,21 +41,26 @@ public class ServiceDisplay extends ArrayAdapter<ServicesSettings> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String name = getItem(position).getName();
-        boolean state;
-        if(userType.equals("admin")){
-            state = getItem(position).isActive();
-        }
-        else{
-            state = getItem(position).isEmployeeEnable();
-        }
-
         String stateService = "";
 
-        if(state){
-            stateService = "Activated";
-        }else{
-            stateService = "Deactivated";
+        boolean state = false;
+        if(userType.equals("admin")){
+            state = getItem(position).isActive();
+
+            if(state){
+                stateService = "Activated";
+            }else{
+                stateService = "Deactivated";
+            }
         }
+        if(userType.equals("employee")){
+            stateService = "-";
+            // TO-DO  finsih this
+        }
+
+
+
+
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);

@@ -36,7 +36,6 @@ public class ServiceAdmin extends AppCompatActivity {
 
     private boolean noServ = false;
 
-    ArrayList<String> list = new ArrayList<>();
 
 
     @Override
@@ -106,28 +105,10 @@ public class ServiceAdmin extends AppCompatActivity {
                     @Override
                     public void onDataChange( DataSnapshot ServiceSnapshot) {
 
-                        int numService = (int)ServiceSnapshot.getChildrenCount();
-                        int count = 0;
-                        activeService = new boolean[numService];
-                        if (numService<1) {
-                            noServ = true;
-                            activeService = new boolean[2];
-                        }
-
                         for(DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
                             service = dataSnapshot.getValue(ServicesSettings.class);
-                            if (service != null && !noServ) {
-
-                                activeService[count]=service.isActive();
                                 list.add(service);
                                 listview.requestLayout();
-
-                                count++;
-
-                            } else {
-                                startActivity(new Intent(getApplicationContext(), HomePage.class)); //added
-                                finish();
-                            }
                         }
                     }
                     @Override
@@ -136,17 +117,8 @@ public class ServiceAdmin extends AppCompatActivity {
                 });
 
 
-
         ServiceDisplay listAdapter = new ServiceDisplay(this,R.layout.service_display, list, "admin");
         listview.setAdapter(listAdapter);
 
-        /*if(!noServ){
-            int t =0;
-            for (boolean i : activeService){
-                listview.setItemChecked(t, i);
-                t++;
-            }
-        }
-        */
     }
 }

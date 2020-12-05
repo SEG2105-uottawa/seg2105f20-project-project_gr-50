@@ -1,9 +1,11 @@
 package seg2105.project50.novigrad;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,14 +13,21 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 public class Private_my_hours extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private TextView monText,tueText,wedText,thurText,friText,satText,sunText;
     private String  bare_email = "";
+    private Hours hours;
+
     DatabaseReference databaseEmployees;
 
 
@@ -40,8 +49,6 @@ public class Private_my_hours extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
-
-
         String first_email = user.getEmail();
 
         for (int i = 0; i < first_email.length(); i++) {
@@ -49,6 +56,22 @@ public class Private_my_hours extends AppCompatActivity {
                 bare_email += first_email.charAt(i);
             }
         }
+
+            databaseEmployees.child("Branch")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot ServiceSnapshot) {
+                        hours = ServiceSnapshot.child(("Branch "+bare_email)).child("Hours").getValue(Hours.class);
+                        setText(hours);
+                        Log.e("atg",hours.getFriday());
+                        Toast.makeText(getApplicationContext(),hours.getSunday(),Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
 
         Button done = findViewById(R.id.doneBTN);
         done.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +113,17 @@ public class Private_my_hours extends AppCompatActivity {
 
     }
 
+    private void setText(Hours h){
 
+        monText.setText(h.getMonday());
+        tueText.setText(h.getTuesday());
+        wedText.setText(h.getWednesday());
+        thurText.setText(h.getThursday());
+        friText.setText(h.getFriday());
+        satText.setText(h.getSaturday());
+        sunText.setText(h.getSunday());
+
+    }
 
     public void logoff(View v){
         auth.signOut();
