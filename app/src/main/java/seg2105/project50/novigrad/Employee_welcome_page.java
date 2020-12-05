@@ -74,8 +74,8 @@ public class Employee_welcome_page extends AppCompatActivity {
             public void onClick(View view) {
 
                 try{
-                    string_address = address.toString().trim();
-                    string_address = number.toString().trim();
+                    string_address = address.getText().toString().trim();
+                    string_address = number.getText().toString().trim();
 
                     if (!confirmInput()) {
                         return;

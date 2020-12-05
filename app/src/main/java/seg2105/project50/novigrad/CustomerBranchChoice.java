@@ -40,6 +40,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
     private ListView available_service;
 
     private ArrayList<String> autoCompleteKey;
+    private ArrayList<Hours> hoursSet;
 
     private Hours hours;
     private String workHours;
@@ -86,6 +87,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
         radioButton3 = (RadioButton)findViewById(R.id.radioButton3);
 
         autoCompleteKey = new ArrayList<>();
+        hoursSet = new ArrayList<>();
 
         allBranches();
 
@@ -127,107 +129,115 @@ public class CustomerBranchChoice extends AppCompatActivity {
                     }
                 }
                 else if(radioButton2.isChecked()){
-                    list.clear();
-                    database.child("Branch")
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange( DataSnapshot ServiceSnapshot) {
-                                    // Hours r = ServiceSnapshot.getValue()
-                                    for(DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
-                                        hours = dataSnapshot.child("Hours").getValue(Hours.class);
+                    if (service_name.equals("")) {
+                        allBranches();
+                    }else {
+                        hoursSet.clear();
+                        list.clear();
+                        database.child("Branch")
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot ServiceSnapshot) {
+                                        // Hours r = ServiceSnapshot.getValue()
+                                        for (DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
+                                            hours = dataSnapshot.child("Hours").getValue(Hours.class);
 
-                                        Calendar calendar = Calendar.getInstance();
-                                        int days = calendar.get(Calendar.DAY_OF_WEEK);
-                                        if (hours != null) {
-                                            switch (days) {
-                                                case 6:
-                                                    workHours = hours.getSunday();
-                                                    break;
-                                                case 0:
-                                                    workHours = hours.getMonday();
-                                                    break;
-                                                case 1:
-                                                    workHours = hours.getTuesday();
-                                                    break;
-                                                case 2:
-                                                    workHours = hours.getWednesday();
-                                                    break;
-                                                case 3:
-                                                    workHours = hours.getThursday();
-                                                    break;
-                                                case 4:
-                                                    workHours = hours.getFriday();
-                                                    break;
-                                                case 5:
-                                                    workHours = hours.getSaturday();
-                                                    break;
-                                            }
-                                            if(workHours.equals("CLOSED")){
-
-                                            }else {
-                                                String[] startEnd = workHours.split("-");
-
-                                                String time1 = startEnd[0];
-                                                String time2 = startEnd[1];
-
-                                                int customerTime;
-
-                                                int[] intTime = new int[2];
-                                                String temp = "";
-                                                String temp2 = "";
-                                                String tempCustomer = "";
-
-
-                                                for (int x = 0; x < time1.length(); x++) {
-                                                    if (Character.isDigit(time1.charAt(x))) {
-                                                        temp += time1.charAt(x);
-                                                    }
+                                            Calendar calendar = Calendar.getInstance();
+                                            int days = calendar.get(Calendar.DAY_OF_WEEK);
+                                            if (hours != null) {
+                                                switch (days) {
+                                                    case Calendar.SUNDAY:
+                                                        workHours = hours.getSunday();
+                                                        break;
+                                                    case Calendar.MONDAY:
+                                                        workHours = hours.getMonday();
+                                                        break;
+                                                    case Calendar.TUESDAY:
+                                                        workHours = hours.getTuesday();
+                                                        break;
+                                                    case Calendar.WEDNESDAY:
+                                                        workHours = hours.getWednesday();
+                                                        break;
+                                                    case Calendar.THURSDAY:
+                                                        workHours = hours.getThursday();
+                                                        break;
+                                                    case Calendar.FRIDAY:
+                                                        workHours = hours.getFriday();
+                                                        break;
+                                                    case Calendar.SATURDAY:
+                                                        workHours = hours.getSaturday();
+                                                        break;
                                                 }
-                                                for (int xx = 0; xx < time2.length(); xx++) {
-                                                    if (Character.isDigit(time2.charAt(xx))) {
-                                                        temp2 += time2.charAt(xx);
+                                                if (workHours.equals("CLOSED")) {
+
+                                                } else {
+                                                    String[] startEnd = workHours.split("-");
+
+                                                    String time1 = startEnd[0];
+                                                    String time2 = startEnd[1];
+
+                                                    int customerTime;
+
+                                                    int[] intTime = new int[2];
+                                                    String temp = "";
+                                                    String temp2 = "";
+                                                    String tempCustomer = "";
+
+
+                                                    for (int x = 0; x < time1.length(); x++) {
+                                                        if (Character.isDigit(time1.charAt(x))) {
+                                                            temp += time1.charAt(x);
+                                                        }
                                                     }
-                                                }
-                                                for (int xxx = 0; xxx < service_name.length(); xxx++) {
-                                                    if (Character.isDigit(service_name.charAt(xxx))) {
-                                                        tempCustomer += service_name.charAt(xxx);
+                                                    for (int xx = 0; xx < time2.length(); xx++) {
+                                                        if (Character.isDigit(time2.charAt(xx))) {
+                                                            temp2 += time2.charAt(xx);
+                                                        }
                                                     }
-                                                }
+                                                    for (int xxx = 0; xxx < service_name.length(); xxx++) {
+                                                        if (Character.isDigit(service_name.charAt(xxx))) {
+                                                            tempCustomer += service_name.charAt(xxx);
+                                                        }
+                                                    }
 
 
                                                     intTime[0] = Integer.parseInt(temp);
                                                     intTime[1] = Integer.parseInt(temp2);
                                                     customerTime = Integer.parseInt(tempCustomer);
 
-                                                    if(time1.charAt(time1.length()-2) == 'p'){
+                                                    if (time1.charAt(time1.length() - 2) == 'p') {
                                                         intTime[0] += 12;
                                                     }
-                                                if(time2.charAt(time2.length()-2) == 'p'){
-                                                    intTime[1] += 12;
-                                                }
+                                                    if (time2.charAt(time2.length() - 2) == 'p') {
+                                                        intTime[1] += 12;
+                                                    }
 
-                                                if(service_name.charAt(service_name.length()-2) == 'p'){
-                                                    customerTime += 12;
-                                                }
+                                                    if (service_name.charAt(service_name.length() - 2) == 'p') {
+                                                        customerTime += 12;
+                                                    }
 
-                                                if(customerTime >= intTime[0] && customerTime <= intTime[1]){
+                                                    if (customerTime >= intTime[0] && customerTime <= intTime[1]) {
 
-                                                    service = dataSnapshot.child("Branch Info").getValue(BranchInfo.class);
-                                                    list.add(service);
-                                                    listview.requestLayout();
+                                                        service = dataSnapshot.child("Branch Info").getValue(BranchInfo.class);
+
+
+                                                        hoursSet.add(hours);
+
+                                                        list.add(service);
+                                                        listview.requestLayout();
+                                                    }
                                                 }
                                             }
                                         }
+
                                     }
 
-                                }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                }
-                            });
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
 
-                        setListview();
-
+                    }
                 }
                 else if(radioButton3.isChecked()) {
                     if (service_name.equals("")) {
@@ -274,10 +284,10 @@ public class CustomerBranchChoice extends AppCompatActivity {
         return (data+email_no_signs);
     }
 
-    private void setListview(){
+   /* private void setListview(){
         BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list);
         listview.setAdapter(listAdapter);
-    }
+    }*/
 
     public void refreshAvailableServices(){
         list2 = new ArrayList<>();
@@ -362,6 +372,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
     public void allBranches(){
         list.clear();
+        hoursSet.clear();
 
         database.child("Branch")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -373,6 +384,9 @@ public class CustomerBranchChoice extends AppCompatActivity {
                             service = dataSnapshot.getValue(BranchInfo.class);
                             if (service != null) {
 
+                                DataSnapshot dataHours = dataSnapshotUp.child("Hours");
+                                hours = dataHours.getValue(Hours.class);
+                                hoursSet.add(hours);
                                 list.add(service);
                                 listview.requestLayout();
 
@@ -392,7 +406,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
 
 
-        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list);
+        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list, hoursSet);
         listview.setAdapter(listAdapter);
 
     }
@@ -401,6 +415,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
     public void refreshBranch_service(final String serviceN){
 
         list.clear();
+        hoursSet.clear();
 
         database.child("Branch")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -411,6 +426,10 @@ public class CustomerBranchChoice extends AppCompatActivity {
                             service = dataSnapshot.getValue(BranchInfo.class);
                             if (service != null) {
                                 if( dataSnapshotUp.child("Services").child(serviceN).exists()){
+
+                                    DataSnapshot dataHours = dataSnapshotUp.child("Hours");
+                                    hours = dataHours.getValue(Hours.class);
+                                    hoursSet.add(hours);
                                     list.add(service);
                                     listview.requestLayout();
                                 }
@@ -428,7 +447,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
 
 
-        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list);
+        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list, hoursSet);
         listview.setAdapter(listAdapter);
 
 
@@ -437,6 +456,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
     public void refreshBranch_address(final String serviceN){
 
         list.clear();
+        hoursSet.clear();
 
         database.child("Branch")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -447,6 +467,10 @@ public class CustomerBranchChoice extends AppCompatActivity {
                             service = dataSnapshot.getValue(BranchInfo.class);
                             if (service != null) {
                                 if( service.getAddress().equals(serviceN)){
+
+                                    DataSnapshot dataHours = dataSnapshotUp.child("Hours");
+                                    hours = dataHours.getValue(Hours.class);
+                                    hoursSet.add(hours);
                                     list.add(service);
                                     listview.requestLayout();
                                 }
@@ -464,7 +488,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
 
 
-        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list);
+        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list, hoursSet);
         listview.setAdapter(listAdapter);
 
 
