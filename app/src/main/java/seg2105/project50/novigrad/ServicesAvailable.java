@@ -111,6 +111,19 @@ public class ServicesAvailable extends AppCompatActivity {
 
     }
 
+    public void takeToRate(View view){
+        finish();
+        Intent intent = new Intent(getApplicationContext(), Send_rating.class);
+        intent.putExtra("branch_name", ser_num);
+        startActivity(intent);
+    }
+
+    public void takeToView(View view){
+        finish();
+        Intent intent = new Intent(getApplicationContext(),View_Ratings.class);
+        intent.putExtra("branch_name",ser_num);
+        startActivity(intent);
+    }
 
     public void Home(View view){
             finish();

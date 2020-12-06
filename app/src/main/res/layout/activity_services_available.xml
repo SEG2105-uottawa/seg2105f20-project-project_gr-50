@@ -19,20 +19,40 @@
             android:onClick="Home"
             android:text="home" />
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="takeToRate"
+            android:text="Rate Branch"
+            android:translationX="120dp"
+            android:translationY="-45dp" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:onClick="takeToView"
+            android:text="View Rating"
+            android:translationX="270dp"
+            android:translationY="-90dp" />
+
         <TextView
             android:id="@+id/noService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text="TextView"
             android:textSize="20sp"
-            android:text="TextView" />
+            android:translationY="-100dp" />
 
         <ListView
             android:id="@+id/services_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="446dp"
+            android:translationY="-90dp" />
 
     </LinearLayout>
 

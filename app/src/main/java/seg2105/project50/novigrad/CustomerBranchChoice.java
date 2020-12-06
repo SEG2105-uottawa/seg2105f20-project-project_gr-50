@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class CustomerBranchChoice extends AppCompatActivity {
 
@@ -114,7 +115,6 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
                                             if (dataSnapshot != null) {
                                                 if (dataSnapshot.getKey().equals(service_name)) {
-                                                    Toast.makeText(getApplicationContext(), "button working", Toast.LENGTH_LONG).show();
                                                     refreshBranch_service(service_name);
                                                     break;
                                                 }
@@ -171,60 +171,74 @@ public class CustomerBranchChoice extends AppCompatActivity {
                                                 if (workHours.equals("CLOSED")) {
 
                                                 } else {
-                                                    String[] startEnd = workHours.split("-");
+                                                    try {
+                                                        String[] startEnd = workHours.split("-");
 
-                                                    String time1 = startEnd[0];
-                                                    String time2 = startEnd[1];
+                                                        String time1 = startEnd[0];
+                                                        String time2 = startEnd[1];
 
-                                                    int customerTime;
+                                                        int customerTime;
 
-                                                    int[] intTime = new int[2];
-                                                    String temp = "";
-                                                    String temp2 = "";
-                                                    String tempCustomer = "";
+                                                        int[] intTime = new int[2];
+                                                        String temp = "";
+                                                        String temp2 = "";
+                                                        String tempCustomer = "";
 
 
-                                                    for (int x = 0; x < time1.length(); x++) {
-                                                        if (Character.isDigit(time1.charAt(x))) {
-                                                            temp += time1.charAt(x);
+                                                        for (int x = 0; x < time1.length(); x++) {
+                                                            if (Character.isDigit(time1.charAt(x))) {
+                                                                temp += time1.charAt(x);
+                                                            }
+                                                        }
+                                                        for (int xx = 0; xx < time2.length(); xx++) {
+                                                            if (Character.isDigit(time2.charAt(xx))) {
+                                                                temp2 += time2.charAt(xx);
+                                                            }
+                                                        }
+                                                        for (int xxx = 0; xxx < service_name.length(); xxx++) {
+                                                            if (Character.isDigit(service_name.charAt(xxx))) {
+                                                                tempCustomer += service_name.charAt(xxx);
+                                                            }
+                                                        }
+
+
+                                                        intTime[0] = Integer.parseInt(temp);
+                                                        intTime[1] = Integer.parseInt(temp2);
+                                                        customerTime = Integer.parseInt(tempCustomer);
+
+                                                        if (time1.charAt(time1.length() - 2) == 'p') {
+                                                            intTime[0] += 12;
+                                                        }
+                                                        if (time2.charAt(time2.length() - 2) == 'p') {
+                                                            intTime[1] += 12;
+                                                        }
+
+                                                        if (service_name.charAt(service_name.length() - 2) == 'p') {
+                                                            customerTime += 12;
+                                                        }
+
+                                                        if (customerTime >= intTime[0] && customerTime <= intTime[1]) {
+
+                                                            service = dataSnapshot.child("Branch Info").getValue(BranchInfo.class);
+
+
+                                                            hoursSet.add(hours);
+
+                                                            list.add(service);
+                                                            listview.requestLayout();
                                                         }
                                                     }
-                                                    for (int xx = 0; xx < time2.length(); xx++) {
-                                                        if (Character.isDigit(time2.charAt(xx))) {
-                                                            temp2 += time2.charAt(xx);
-                                                        }
-                                                    }
-                                                    for (int xxx = 0; xxx < service_name.length(); xxx++) {
-                                                        if (Character.isDigit(service_name.charAt(xxx))) {
-                                                            tempCustomer += service_name.charAt(xxx);
-                                                        }
-                                                    }
+                                                    catch(Exception e){
 
 
-                                                    intTime[0] = Integer.parseInt(temp);
-                                                    intTime[1] = Integer.parseInt(temp2);
-                                                    customerTime = Integer.parseInt(tempCustomer);
-
-                                                    if (time1.charAt(time1.length() - 2) == 'p') {
-                                                        intTime[0] += 12;
-                                                    }
-                                                    if (time2.charAt(time2.length() - 2) == 'p') {
-                                                        intTime[1] += 12;
-                                                    }
-
-                                                    if (service_name.charAt(service_name.length() - 2) == 'p') {
-                                                        customerTime += 12;
-                                                    }
-
-                                                    if (customerTime >= intTime[0] && customerTime <= intTime[1]) {
-
-                                                        service = dataSnapshot.child("Branch Info").getValue(BranchInfo.class);
+                                                             search.setError("input a time today i.e 7am or 5pm");
+                                                             search.setError("input a time today i.e 7am or 5pm");
+                                                            Toast.makeText(CustomerBranchChoice.this,"input a time today i.e 7am or 5pm", Toast.LENGTH_SHORT).show();
 
 
-                                                        hoursSet.add(hours);
+                                                            finish();
+                                                            startActivity(new Intent(getApplicationContext(), CustomerBranchChoice.class));
 
-                                                        list.add(service);
-                                                        listview.requestLayout();
                                                     }
                                                 }
                                             }

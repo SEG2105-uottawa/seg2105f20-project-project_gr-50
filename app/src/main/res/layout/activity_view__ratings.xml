@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View_Ratings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/view_ratings_greet"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:gravity="center"
+            android:text="Customer Ratings Given"
+            android:textColor="#020202"
+            android:textSize="18sp"
+            android:translationY="120dp" />
+
+        <ListView
+            android:id="@+id/list_of_ratings"
+            android:layout_width="match_parent"
+            android:layout_height="458dp"
+            android:translationY="130dp">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/button_to_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="take_go_back"
+            android:text="Back"
+            android:translationY="-500dp" />
+    </LinearLayout>
+
+</RelativeLayout>

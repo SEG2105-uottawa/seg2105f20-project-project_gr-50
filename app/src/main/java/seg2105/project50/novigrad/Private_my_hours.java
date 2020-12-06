@@ -64,7 +64,7 @@ public class Private_my_hours extends AppCompatActivity {
                         hours = ServiceSnapshot.child(("Branch "+bare_email)).child("Hours").getValue(Hours.class);
                         setText(hours);
                         Log.e("atg",hours.getFriday());
-                        Toast.makeText(getApplicationContext(),hours.getSunday(),Toast.LENGTH_LONG).show();
+
                     }
 
                     @Override

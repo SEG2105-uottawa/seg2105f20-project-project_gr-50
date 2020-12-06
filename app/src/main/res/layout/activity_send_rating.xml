@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Send_rating">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/intro_text"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:gravity="center"
+            android:text="Rate The Branch"
+            android:textColor="#040404"
+            android:textSize="18sp"
+            android:translationY="150dp" />
+
+        <EditText
+            android:id="@+id/commentLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Comments"
+            android:inputType="textPersonName"
+            android:translationY="170dp" />
+
+        <EditText
+            android:id="@+id/RatingLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="rating 1 out of 5"
+            android:inputType="textPersonName"
+            android:translationY="180dp" />
+
+        <Button
+            android:id="@+id/Rating_Done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="Done"
+            android:text="Done"
+            android:translationY="200dp" />
+
+        <Button
+            android:id="@+id/Rating_Back"
+            android:layout_width="99dp"
+            android:layout_height="69dp"
+            android:background="@drawable/arrowpointingleft"
+            android:onClick="TakeBack"
+            android:text="Button"
+            android:translationY="-200dp" />
+    </LinearLayout>
+</RelativeLayout>
