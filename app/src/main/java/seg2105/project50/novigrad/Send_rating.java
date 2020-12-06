@@ -26,6 +26,8 @@ public class Send_rating extends AppCompatActivity {
 
     private DatabaseReference database;
 
+    private String commentErrorText;
+    private String ratingErrorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,12 @@ public class Send_rating extends AppCompatActivity {
 
     public void Done(View view){
 
-    if(validComment()&&validRating()){
+    if(confirmInput()){
         String valid_comment = comment.getText().toString().trim();
         String valid_rating = rating.getText().toString().trim();
 
          Rate newOne = new Rate(valid_comment,valid_rating);
-         database.child("Branch").child(branch_name).child("Ratings").child(generateUserID()).setValue(newOne);
+         database.child("Branch").child(branch_name).child("Ratings").child(generateUserID(getUserEmail())).setValue(newOne);
         finish();
         startActivity(new Intent(getApplicationContext(),CustomerBranchChoice.class));
     }
@@ -64,10 +66,8 @@ public class Send_rating extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),CustomerBranchChoice.class));
     }
 
-   public String generateUserID(){
-
-           String first_email= user.getEmail();
-           String bare_email= "Branch ";
+   public String generateUserID(String first_email){
+         String bare_email= "Branch ";
            for(int i=0;i<first_email.length();i++){
                if(first_email.charAt(i)!='@'&&first_email.charAt(i)!='.'){
                    bare_email+=first_email.charAt(i);
@@ -78,41 +78,59 @@ public class Send_rating extends AppCompatActivity {
        }
 
 
-    public boolean validComment(){
-        String comment_string = comment.getText().toString().trim();
 
-        if(comment_string.isEmpty()){
-            comment.setError("Comment cannot be empty");
+    public boolean confirmInput(){
+        if (!validComment(getComment()) | !validRating(getRating())){
+            comment.setError(commentErrorText);
+            rating.setError(ratingErrorText);
             return false;
         }
+        else{
+            return true;
+        }
+    }
+
+
+    public boolean validComment(String comment_string){
+        if(comment_string.isEmpty()){
+            commentErrorText = "Comment cannot be empty";
+            return false;
+        }
+        commentErrorText = null;
         return true;
     }
 
-    public boolean validRating(){
-        String rating_String = rating.getText().toString().trim();
-
+    public boolean validRating(String rating_String){
         if(rating_String.length()>1){
-            rating.setError("number should be between 1-5");
+            ratingErrorText =  "number should be between 1-5";
             return false;
         }
        try{
            int a=Integer.parseInt(rating_String);
            if(a>=1&&a<=5){
+               ratingErrorText = null;
                return true;
            }
            else{
-               rating.setError("number should be between 1 and 5");
+               ratingErrorText = "number should be between 1 and 5";
                return false;
            }
 
        }
        catch(Exception e){
-           rating.setError("Input a number between 1 and 5");
+           ratingErrorText = "Input a number between 1 and 5";
            return false;
        }
-
-
     }
 
+    public String getUserEmail(){
+        return user.getEmail();
+    }
 
+    public String getRating(){
+        return rating.getText().toString().trim();
+    }
+    public String getComment(){
+        return comment.getText().toString().trim();
+    }
 }
