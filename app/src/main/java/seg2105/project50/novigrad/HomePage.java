@@ -89,6 +89,7 @@ public class HomePage extends AppCompatActivity {
 
     public void clear(View view){
         String bare_email = bare_email();
+        database.child("Public Notifications Customers").child(bare_email).removeValue();
         database.child("Notifications").child(bare_email).removeValue();
         loadNotification();
     }
@@ -143,7 +144,8 @@ public class HomePage extends AppCompatActivity {
                 });
 
 
-        database.child("Notifications All")
+        database.child("Public Notifications Customers")
+                .child(bare_email)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange( DataSnapshot ServiceSnapshot) {

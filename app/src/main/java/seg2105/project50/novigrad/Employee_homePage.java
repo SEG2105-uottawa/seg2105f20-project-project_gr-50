@@ -57,7 +57,7 @@ public class Employee_homePage extends AppCompatActivity {
     private void loadNotification(){
         notif_list.clear();
 
-        database.child("Notifications Employee")
+        database.child("Public Notifications Employee").child(bare_email())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange( DataSnapshot ServiceSnapshot) {
@@ -65,34 +65,6 @@ public class Employee_homePage extends AppCompatActivity {
                             list.setVisibility(View.GONE);
                             clear.setVisibility(View.GONE);
                             noNotif.setVisibility(View.VISIBLE);
-                        } else {
-                            noNotif.setVisibility(View.GONE);
-                            list.setVisibility(View.VISIBLE);
-                            clear.setVisibility(View.VISIBLE);
-
-                            for (DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
-                                notification = dataSnapshot.getValue(Notification.class);
-                                if (notification != null) {
-                                    notif_list.add(notification);
-                                } else {
-                                    startActivity(new Intent(getApplicationContext(), HomePage.class)); //added
-                                    finish();
-                                    Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_SHORT);
-                                }
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled (@NonNull DatabaseError databaseError){
-                    }
-
-                });
-
-        database.child("Notifications All")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange( DataSnapshot ServiceSnapshot) {
-                        if (!(ServiceSnapshot.hasChildren())) {
                         } else {
                             noNotif.setVisibility(View.GONE);
                             list.setVisibility(View.VISIBLE);
@@ -144,7 +116,7 @@ public class Employee_homePage extends AppCompatActivity {
 
     public void clear(View view){
         String bare_email = bare_email();
-        database.child("Notifications").child(bare_email).removeValue();
+        database.child("Public Notifications Employee").child(bare_email).removeValue();
         loadNotification();
     }
 
