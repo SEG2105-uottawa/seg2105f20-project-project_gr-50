@@ -131,13 +131,15 @@ public class CustomerBranchChoice extends AppCompatActivity {
                 else if(radioButton2.isChecked()){
                     if (service_name.equals("")) {
                         allBranches();
-                    }else {
+                    }
+                    if(validateHours(service_name)) {
                         hoursSet.clear();
                         list.clear();
                         database.child("Branch")
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot ServiceSnapshot) {
+                                        boolean noService = true;
                                         // Hours r = ServiceSnapshot.getValue()
                                         for (DataSnapshot dataSnapshot : ServiceSnapshot.getChildren()) {
                                             hours = dataSnapshot.child("Hours").getValue(Hours.class);
@@ -171,7 +173,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
                                                 if (workHours.equals("CLOSED")) {
 
                                                 } else {
-                                                    try {
+
                                                         String[] startEnd = workHours.split("-");
 
                                                         String time1 = startEnd[0];
@@ -226,22 +228,15 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
                                                             list.add(service);
                                                             listview.requestLayout();
+                                                            noService = false;
                                                         }
-                                                    }
-                                                    catch(Exception e){
 
 
-                                                             search.setError("input a time today i.e 7am or 5pm");
-                                                             search.setError("input a time today i.e 7am or 5pm");
-                                                            Toast.makeText(getApplicationContext(),"input a time today i.e 7am or 5pm", Toast.LENGTH_SHORT).show();
-
-
-                                                            finish();
-                                                            startActivity(new Intent(getApplicationContext(), CustomerBranchChoice.class));
-
-                                                    }
                                                 }
                                             }
+                                        }
+                                        if(noService) {
+                                            Toast.makeText(getApplicationContext(), "No branch available", Toast.LENGTH_LONG).show();
                                         }
 
                                     }
@@ -250,7 +245,8 @@ public class CustomerBranchChoice extends AppCompatActivity {
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                     }
                                 });
-
+                    }else{
+                        Toast.makeText(getApplicationContext(),"please use this format : 3pm, 12am, 6am...",Toast.LENGTH_LONG).show();
                     }
                 }
                 else if(radioButton3.isChecked()) {
@@ -435,12 +431,13 @@ public class CustomerBranchChoice extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange( DataSnapshot ServiceSnapshot) {
+                        boolean noService = true;
                         for(DataSnapshot dataSnapshotUp : ServiceSnapshot.getChildren()) {
                             DataSnapshot dataSnapshot = dataSnapshotUp.child("Branch Info");
                             service = dataSnapshot.getValue(BranchInfo.class);
                             if (service != null) {
                                 if( dataSnapshotUp.child("Services").child(serviceN).exists()){
-
+                                    noService = false;
                                     DataSnapshot dataHours = dataSnapshotUp.child("Hours");
                                     hours = dataHours.getValue(Hours.class);
                                     hoursSet.add(hours);
@@ -452,6 +449,9 @@ public class CustomerBranchChoice extends AppCompatActivity {
                                 //finish();
                                 //TODO make a toast , "something went wrong"
                             }
+                        }
+                        if(noService) {
+                            Toast.makeText(getApplicationContext(), "No branch available", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
@@ -467,6 +467,41 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
     }
 
+    private boolean validateHours(String hours){
+        boolean validate = false;
+
+        try{
+
+            String time1 = hours;
+            time1.toLowerCase();
+            String tmp = "";
+
+            for (int x = 0; x < time1.length(); x++) {
+                if (Character.isDigit(time1.charAt(x))) {
+                    tmp += time1.charAt(x);
+                }
+            }
+
+            int timeCode = Integer.parseInt(tmp);
+
+            if(timeCode > 0 && timeCode < 13){
+                if(time1.charAt(tmp.length()) == 'p' || time1.charAt(tmp.length()) == 'a' ){
+                    if(time1.charAt(tmp.length()+1) == 'm'){
+                        if(time1.length() == tmp.length() + 2){
+                            validate = true;
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+            validate = false;
+        }
+
+
+        return validate;
+
+    }
+
     public void refreshBranch_address(final String serviceN){
 
         list.clear();
@@ -476,23 +511,28 @@ public class CustomerBranchChoice extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange( DataSnapshot ServiceSnapshot) {
+                        boolean noService = true;
                         for(DataSnapshot dataSnapshotUp : ServiceSnapshot.getChildren()) {
                             DataSnapshot dataSnapshot = dataSnapshotUp.child("Branch Info");
                             service = dataSnapshot.getValue(BranchInfo.class);
                             if (service != null) {
                                 if( service.getAddress().equals(serviceN)){
-
+                                    noService = false;
                                     DataSnapshot dataHours = dataSnapshotUp.child("Hours");
                                     hours = dataHours.getValue(Hours.class);
                                     hoursSet.add(hours);
                                     list.add(service);
                                     listview.requestLayout();
                                 }
+
                             } else {
                                 //startActivity(new Intent(getApplicationContext(), HomePage.class)); //added
                                 //finish();
                                 //TODO make a toast , "something went wrong"
                             }
+                        }
+                        if(noService) {
+                            Toast.makeText(getApplicationContext(), "No branch available", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
