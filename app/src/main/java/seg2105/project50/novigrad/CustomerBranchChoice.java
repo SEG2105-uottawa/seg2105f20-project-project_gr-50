@@ -120,6 +120,9 @@ public class CustomerBranchChoice extends AppCompatActivity {
                                                 }
                                             }
                                         }
+
+                                        clearListView();
+
                                     }
 
                                     @Override
@@ -236,6 +239,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
                                             }
                                         }
                                         if(noService) {
+                                            clearListView();
                                             Toast.makeText(getApplicationContext(), "No branch available", Toast.LENGTH_LONG).show();
                                         }
 
@@ -500,6 +504,16 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
         return validate;
 
+    }
+
+    private void clearListView(){
+        list.clear();
+        hoursSet.clear();
+
+        BranchDisplay listAdapter = new BranchDisplay(this, R.layout.branch_display_list, list, hoursSet);
+        listview.setAdapter(listAdapter);
+
+        Toast.makeText(getApplicationContext(), "No branch available", Toast.LENGTH_LONG).show();
     }
 
     public void refreshBranch_address(final String serviceN){
