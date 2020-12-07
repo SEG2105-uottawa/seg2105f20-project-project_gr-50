@@ -15,7 +15,9 @@
             android:id="@+id/adminGreet"
             android:layout_width="fill_parent"
             android:layout_height="103dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
+            android:translationY="30dp"
             android:text="@string/admin_greet" />
 
         <Button
@@ -48,6 +50,14 @@
             android:onClick="sendNotfi"
             android:layout_height="wrap_content"
             android:text="Send notifications"
+            android:translationY="-300dp" />
+
+        <Button
+            android:id="@+id/notif_delete"
+            android:layout_width="214dp"
+            android:onClick="deleteNotif"
+            android:layout_height="wrap_content"
+            android:text="Delete Public notification"
             android:translationY="-300dp" />
 
     </LinearLayout>

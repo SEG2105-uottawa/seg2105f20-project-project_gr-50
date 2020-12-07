@@ -233,7 +233,7 @@ public class CustomerBranchChoice extends AppCompatActivity {
 
                                                              search.setError("input a time today i.e 7am or 5pm");
                                                              search.setError("input a time today i.e 7am or 5pm");
-                                                            Toast.makeText(CustomerBranchChoice.this,"input a time today i.e 7am or 5pm", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(getApplicationContext(),"input a time today i.e 7am or 5pm", Toast.LENGTH_SHORT).show();
 
 
                                                             finish();

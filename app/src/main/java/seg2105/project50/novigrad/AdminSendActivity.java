@@ -55,15 +55,25 @@ public class AdminSendActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                boolean finishActivity = false;
+
                 additional_text = notif.getText().toString().trim();
+
                 if(!(additional_text.equals(""))) {
                     if (notif_to_emp.isChecked()) {
                         sendToEmp();
                         Toast.makeText(getApplicationContext(), "Notification sent", Toast.LENGTH_LONG).show();
+                        finishActivity = true;
                     }
                     if (notif_to_all.isChecked()) {
                         sendToCust();
                         Toast.makeText(getApplicationContext(), "Notification sent", Toast.LENGTH_LONG).show();
+                        finishActivity = true;
+                    }
+                    if(finishActivity){
+                        finish();
+                        startActivity(new Intent(getApplicationContext(),Admin.class));
                     }
                     if(!(notif_to_all.isChecked() || notif_to_all.isChecked())){
                         Toast.makeText(getApplicationContext(), "Please select the recipients", Toast.LENGTH_LONG).show();
@@ -99,8 +109,7 @@ public class AdminSendActivity extends AppCompatActivity {
                     }
                 });
 
-        finish();
-        startActivity(new Intent(getApplicationContext(),Private_approve_requests.class));
+
 
     }
     private void sendToEmp(){
@@ -126,9 +135,6 @@ public class AdminSendActivity extends AppCompatActivity {
                     }
                 });
 
-
-        finish();
-        startActivity(new Intent(getApplicationContext(),Private_approve_requests.class));
 
     }
 
